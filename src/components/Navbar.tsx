@@ -23,8 +23,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
   const navLinks = [
     { name: 'হোম', path: '/' },
     { name: 'প্রোডাক্ট', path: '/products' },
-    { name: 'মূল্যতালিকা (BDT)', path: '/pricing' },
-    { name: 'নির্দেশিকা (Docs)', path: '/docs' },
+    { name: 'মূল্যতালিকা', path: '/pricing' },
+    { name: 'নির্দেশিকা', path: '/docs' },
     { name: 'যোগাযোগ', path: '/contact' },
   ];
 
@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-[13px] font-bold transition-colors ${
+                className={`text-[14px] font-bold transition-colors ${
                   isActive ? 'text-[#064E3B] border-b-2 border-[#064E3B] pb-1' : 'text-[#0B192C]/80 hover:text-[#064E3B]'
                 }`}
               >
@@ -78,13 +78,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={onOpenSignIn}
-            className="text-[13px] font-bold text-[#0B192C] hover:text-[#064E3B] px-3 py-2 transition-colors"
+            className="text-[14px] font-bold text-[#0B192C] hover:text-[#064E3B] px-3 py-2 transition-colors"
           >
             লগইন (Sign In)
           </button>
           <button
             onClick={onOpenDemo}
-            className="group relative inline-flex items-center gap-2 rounded-full bg-[#064E3B] px-5 py-2.5 text-[13px] font-bold text-white shadow-md shadow-[#064E3B]/20 transition-all hover:bg-[#043E2F] hover:shadow-lg active:scale-95 border border-[#064E3B]"
+            className="group relative inline-flex items-center gap-2 rounded-full bg-[#064E3B] px-5 py-2.5 text-[14px] font-bold text-white shadow-md shadow-[#064E3B]/20 transition-all hover:bg-[#043E2F] hover:shadow-lg active:scale-95 border border-[#064E3B]"
           >
             <span>ফ্রি ডেমো বুক করুন</span>
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 text-amber-300" />

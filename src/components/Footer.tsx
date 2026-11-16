@@ -81,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
             <div className="flex flex-col gap-2.5">
               <p className="font-bold text-[#0B192C] tracking-wide uppercase text-[11px]">প্রোডাক্ট</p>
               <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">প্রোডাক্ট ওভারভিউ</Link>
-              <Link to="/pricing" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">মূল্যতালিকা (BDT)</Link>
+              <Link to="/pricing" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">মূল্যতালিকা</Link>
               <button onClick={onOpenSignIn} className="text-left text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">লগইন পোর্টাল</button>
               <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">বইমেলা কাউন্টার পিওএস</Link>
               <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">লেখক রয়্যালটি ইঞ্জিন</Link>
@@ -91,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
             {/* Column 2: Resource */}
             <div className="flex flex-col gap-2.5">
               <p className="font-bold text-[#0B192C] tracking-wide uppercase text-[11px]">রিসোর্স</p>
-              <Link to="/docs" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">ব্যবহার নির্দেশিকা (Docs)</Link>
+              <Link to="/docs" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">ব্যবহার নির্দেশিকা</Link>
               <Link to="/docs" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">রিলিজ নোট (v3.4)</Link>
               <Link to="/docs" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors flex items-center gap-1.5">
                 <span>সিস্টেম স্ট্যাটাস</span>

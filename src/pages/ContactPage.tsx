@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { api, errorMessage } from '../lib/api';
 import { 
   Phone, 
   MessageCircle, 
@@ -15,8 +16,14 @@ import {
   ShieldCheck, 
   CheckCircle,
   ExternalLink,
-  BookOpen
+  BookOpen,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
+
+// The calendar shows November 2026; dates are stored as ISO yyyy-mm-dd.
+const BOOKING_MONTH = '2026-11';
+const toIsoDate = (day: number) => `${BOOKING_MONTH}-${String(day).padStart(2, '0')}`;
 
 interface ContactPageProps {
   onOpenSignIn?: () => void;
@@ -28,6 +35,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
   const [selectedDate, setSelectedDate] = useState<number>(20); // Nov 20
   const [selectedTime, setSelectedTime] = useState<string>('11:30 AM');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [takenSlots, setTakenSlots] = useState<Set<string>>(new Set());
+
+  const loadTakenSlots = useCallback(() => {
+    api<{ slots: { date: string; time: string }[] }>('/bookings/taken')
+      .then(({ slots }) => setTakenSlots(new Set(slots.map((s) => `${s.date}|${s.time}`))))
+      .catch(() => {});
+  }, []);
+  useEffect(() => {
+    loadTakenSlots();
+  }, [loadTakenSlots]);
+  const isTaken = (day: number, time: string) => takenSlots.has(`${toIsoDate(day)}|${time}`);
 
   // Form Fields
   const [formData, setFormData] = useState({
@@ -59,9 +79,36 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
     '07:00 PM'
   ];
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (isTaken(selectedDate, selectedTime)) {
+      setError('এই সময়টি ইতিমধ্যে বুক হয়ে গেছে। অনুগ্রহ করে অন্য সময় বেছে নিন।');
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    try {
+      await api('/bookings', {
+        method: 'POST',
+        body: {
+          kind: activeFormTab,
+          date: toIsoDate(selectedDate),
+          time: selectedTime,
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          pressName: formData.pressName,
+          meetingFormat: formData.meetingFormat,
+          notes: formData.notes,
+        },
+      });
+      setSubmitted(true);
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setLoading(false);
+      loadTakenSlots();
+    }
   };
 
   return (
@@ -296,13 +343,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 text-xs">
                         {availableTimes.map((time) => {
                           const isSelected = selectedTime === time;
+                          const taken = isTaken(selectedDate, time);
                           return (
                             <button
                               type="button"
                               key={time}
+                              disabled={taken}
+                              title={taken ? 'এই সময়টি বুক হয়ে গেছে' : undefined}
                               onClick={() => setSelectedTime(time)}
                               className={`py-2 rounded-lg border text-center font-bold transition-all ${
-                                isSelected
+                                taken
+                                  ? 'bg-[#F1F3F5] border-[#0B192C]/5 text-[#0B192C]/35 line-through cursor-not-allowed'
+                                  : isSelected
                                   ? 'bg-[#0B192C] text-white border-[#0B192C]'
                                   : 'bg-[#FAF9F5] border-[#0B192C]/10 text-[#0B192C] hover:bg-slate-200'
                               }`}
@@ -382,10 +434,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                       </div>
                     </div>
 
+                    {error && (
+                      <div
+                        role="alert"
+                        className="flex items-start gap-2 rounded-xl border border-[#831843]/30 bg-[#FDF2F8] p-3 text-xs font-semibold text-[#831843]"
+                      >
+                        <AlertCircle className="h-4 w-4 shrink-0" />
+                        <span>{error}</span>
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full py-3.5 rounded-xl bg-[#064E3B] text-white text-xs font-bold hover:bg-[#043E2F] shadow-md shadow-[#064E3B]/20 transition-all flex items-center justify-center gap-2"
+                      disabled={loading}
+                      className="w-full py-3.5 rounded-xl bg-[#064E3B] text-white text-xs font-bold hover:bg-[#043E2F] shadow-md shadow-[#064E3B]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
                     >
+                      {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                       <span>{activeFormTab === 'demo' ? 'ডেমো সময় নিশ্চিত করুন' : activeFormTab === 'meeting' ? 'মিটিং কনফার্ম করুন' : 'টিকিট সাবমিট করুন'}</span>
                       <span className="text-amber-300 font-normal">({selectedDate} নভেম্বর, {selectedTime})</span>
                     </button>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Sparkles, ArrowRight, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
-import { PRICING_PLANS, ALL_FEATURES_COMPARISON } from '../data/publisherData';
+import { ALL_FEATURES_COMPARISON } from '../data/publisherData';
+import { usePlans } from '../lib/usePlans';
 
 interface PricingPageProps {
   onOpenDemo: (planName?: string) => void;
@@ -8,6 +9,7 @@ interface PricingPageProps {
 
 export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
   const [isAnnual, setIsAnnual] = useState(true);
+  const plans = usePlans();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const faqs = [
@@ -78,7 +80,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
 
         {/* 4-Tier Pricing Grid */}
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch max-w-7xl mx-auto">
-          {PRICING_PLANS.map((plan) => {
+          {plans.map((plan) => {
             const price = isAnnual ? plan.priceYearly : plan.priceMonthly;
             const isEnterprise = plan.priceMonthly === -1;
 

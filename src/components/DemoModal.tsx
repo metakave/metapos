@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, BookOpen, Building, Mail, User, Shield, Phone } from 'lucide-react';
+import { X, CheckCircle, BookOpen, Building, Mail, User, Shield, Phone, Loader2, AlertCircle } from 'lucide-react';
+import { api, errorMessage } from '../lib/api';
 
 interface DemoModalProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface DemoModalProps {
 
 export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPlan = 'Growth' }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -22,13 +25,24 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    try {
+      await api('/leads', { method: 'POST', body: { ...formData, plan: initialPlan } });
+      setSubmitted(true);
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setError(null);
+    setFormData((f) => ({ ...f, notes: '' }));
     onClose();
   };
 
@@ -189,12 +203,24 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
               />
             </div>
 
+            {error && (
+              <div
+                role="alert"
+                className="flex items-start gap-2 rounded-lg border border-[#831843]/30 bg-[#FDF2F8] p-2.5 text-[11px] font-semibold text-[#831843]"
+              >
+                <AlertCircle className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                <span>{error}</span>
+              </div>
+            )}
+
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full rounded-xl bg-[#064E3B] py-3 text-xs font-bold text-white shadow-md shadow-[#064E3B]/20 hover:bg-[#043E2F] transition-all"
+                disabled={loading}
+                className="w-full rounded-xl bg-[#064E3B] py-3 text-xs font-bold text-white shadow-md shadow-[#064E3B]/20 hover:bg-[#043E2F] transition-all flex items-center justify-center gap-2 disabled:opacity-70"
               >
-                নিশ্চিত করুন ও ফ্রি ডেমো কল নির্ধারণ করুন
+                {loading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
+                {loading ? 'পাঠানো হচ্ছে…' : 'নিশ্চিত করুন ও ফ্রি ডেমো কল নির্ধারণ করুন'}
               </button>
               <p className="mt-2 text-center text-[10px] text-[#0B192C]/60 flex items-center justify-center gap-1 font-semibold">
                 <Shield className="h-3 w-3 text-[#064E3B]" /> কোনো ক্রেডিট কার্ডের প্রয়োজন নেই • সম্পূর্ণ বাংলা সহায়তা

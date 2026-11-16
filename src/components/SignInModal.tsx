@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { X, Lock, Mail, ArrowRight, BookOpen } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { X, Lock, Mail, ArrowRight, BookOpen, Loader2, AlertCircle } from 'lucide-react';
+import { api, errorMessage, type User } from '../lib/api';
 
 interface SignInModalProps {
   isOpen: boolean;
@@ -10,13 +12,48 @@ interface SignInModalProps {
 export const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onOpenDemo }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  // Show the signed-in state if a session already exists.
+  useEffect(() => {
+    if (!isOpen) return;
+    setError(null);
+    api<{ user: User | null }>('/auth/me')
+      .then(({ user }) => setUser(user))
+      .catch(() => {});
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoggedIn(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const { user } = await api<{ user: User }>('/auth/login', {
+        method: 'POST',
+        body: { identifier: email, password },
+      });
+      setPassword('');
+      if (user.role === 'admin') {
+        onClose();
+        navigate('/admin');
+        return;
+      }
+      setUser(user);
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await api('/auth/logout', { method: 'POST' }).catch(() => {});
+    setUser(null);
   };
 
   return (
@@ -34,23 +71,38 @@ export const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onOpe
           </button>
         </div>
 
-        {loggedIn ? (
+        {user ? (
           <div className="p-8 text-center space-y-4">
             <div className="h-12 w-12 rounded-full bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mx-auto text-xl font-bold">
               ✓
             </div>
-            <h4 className="text-lg font-bold text-[#0B192C]">প্রকাশক সেশন প্রস্তুত</h4>
+            <h4 className="text-lg font-bold text-[#0B192C]">স্বাগতম, {user.press_name || user.name}!</h4>
             <p className="text-xs text-[#0B192C]/80 font-medium">
-              স্বাগতম! আপনার ক্যাটালগ, বইমেলা কাউন্টার ও রয়্যালটি খাতা লোড করা হচ্ছে...
+              আপনি সফলভাবে লগইন করেছেন। অ্যাকাউন্ট সম্পর্কিত যেকোনো সহায়তার জন্য আমাদের বাংলা সাপোর্ট টিম পাশে আছে।
             </p>
-            <button
-              onClick={() => {
-                setLoggedIn(false);
-                onClose();
-              }}
-              className="mt-2 rounded-xl bg-[#064E3B] px-6 py-2.5 text-xs font-bold text-white"
-            >
-              ড্যাশবোর্ডে প্রবেশ করুন
+            <div className="flex items-center justify-center gap-2">
+              {user.role === 'admin' && (
+                <button
+                  onClick={() => {
+                    onClose();
+                    navigate('/admin');
+                  }}
+                  className="mt-2 rounded-xl bg-[#064E3B] px-6 py-2.5 text-xs font-bold text-white"
+                >
+                  ড্যাশবোর্ডে প্রবেশ করুন
+                </button>
+              )}
+              <button
+                onClick={onClose}
+                className={`mt-2 rounded-xl px-6 py-2.5 text-xs font-bold ${
+                  user.role === 'admin' ? 'border border-[#0B192C]/20 text-[#0B192C]' : 'bg-[#064E3B] text-white'
+                }`}
+              >
+                ঠিক আছে
+              </button>
+            </div>
+            <button onClick={handleLogout} className="text-[11px] font-bold text-[#831843] hover:underline">
+              লগআউট করুন
             </button>
           </div>
         ) : (
@@ -73,7 +125,7 @@ export const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onOpe
             <div>
               <div className="flex justify-between items-center mb-1">
                 <label className="block font-bold text-[#0B192C]">পাসওয়ার্ড</label>
-                <a href="#reset" className="text-[11px] font-bold text-[#831843] hover:underline">ভুলে গেছেন?</a>
+                <span className="text-[11px] font-bold text-[#831843]">ভুলে গেছেন? সাপোর্টে যোগাযোগ করুন</span>
               </div>
               <div className="relative">
                 <Lock className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#0B192C]/40" />
@@ -88,12 +140,24 @@ export const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onOpe
               </div>
             </div>
 
+            {error && (
+              <div
+                role="alert"
+                className="flex items-start gap-2 rounded-lg border border-[#831843]/30 bg-[#FDF2F8] p-2.5 text-[11px] font-semibold text-[#831843]"
+              >
+                <AlertCircle className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                <span>{error}</span>
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-xl bg-[#064E3B] py-2.5 text-xs font-bold text-white shadow-md hover:bg-[#043E2F] transition-all flex items-center justify-center gap-2"
+              disabled={loading}
+              className="w-full rounded-xl bg-[#064E3B] py-2.5 text-xs font-bold text-white shadow-md hover:bg-[#043E2F] transition-all flex items-center justify-center gap-2 disabled:opacity-70"
             >
-              <span>লগইন করুন</span>
-              <ArrowRight className="h-3.5 w-3.5 text-amber-300" />
+              {loading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
+              <span>{loading ? 'যাচাই করা হচ্ছে…' : 'লগইন করুন'}</span>
+              {!loading && <ArrowRight className="h-3.5 w-3.5 text-amber-300" />}
             </button>
 
             <div className="pt-2 text-center text-[11px] text-[#0B192C]/70 border-t border-[#0B192C]/10 font-medium">

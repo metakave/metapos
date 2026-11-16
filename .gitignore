@@ -25,3 +25,6 @@ dist-ssr
 
 # TypeScript build info
 *.tsbuildinfo
+
+# MetaPOS server data (SQLite database)
+server/data/

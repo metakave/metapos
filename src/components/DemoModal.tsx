@@ -9,6 +9,8 @@ interface DemoModalProps {
 
 export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPlan = 'Growth' }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -22,13 +24,39 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          plan: initialPlan,
+          formType: 'demo',
+          catalogSize: formData.activeTitles,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.error || 'ইমেইল পাঠাতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
+      }
+    } catch (err) {
+      console.error('Demo modal error:', err);
+      setSubmitError('সার্ভারে সংযোগ করা সম্ভব হয়নি। সরাসরি কল করুন।');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setSubmitError(null);
     onClose();
   };
 
@@ -189,12 +217,26 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
               />
             </div>
 
+            {submitError && (
+              <div className="rounded-lg bg-red-50 border border-red-200 p-2.5 text-[11px] text-red-700 font-medium">
+                {submitError}
+              </div>
+            )}
+
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full rounded-xl bg-[#064E3B] py-3 text-xs font-bold text-white shadow-md shadow-[#064E3B]/20 hover:bg-[#043E2F] transition-all"
+                disabled={isSubmitting}
+                className="w-full rounded-xl bg-[#064E3B] py-3 text-xs font-bold text-white shadow-md shadow-[#064E3B]/20 hover:bg-[#043E2F] transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                নিশ্চিত করুন ও ফ্রি ডেমো কল নির্ধারণ করুন
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <span className="h-3.5 w-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                    <span>ইমেইল পাঠানো হচ্ছে...</span>
+                  </div>
+                ) : (
+                  <span>নিশ্চিত করুন ও ফ্রি ডেমো কল নির্ধারণ করুন</span>
+                )}
               </button>
               <p className="mt-2 text-center text-[10px] text-[#0B192C]/60 flex items-center justify-center gap-1 font-semibold">
                 <Shield className="h-3 w-3 text-[#064E3B]" /> কোনো ক্রেডিট কার্ডের প্রয়োজন নেই • সম্পূর্ণ বাংলা সহায়তা

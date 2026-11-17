@@ -28,6 +28,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
   const [selectedDate, setSelectedDate] = useState<number>(20); // Nov 20
   const [selectedTime, setSelectedTime] = useState<string>('11:30 AM');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   // Form Fields
   const [formData, setFormData] = useState({
@@ -59,9 +61,37 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
     '07:00 PM'
   ];
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          selectedDate,
+          selectedTime,
+          formType: activeFormTab,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.error || 'ইমেইল পাঠাতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন বা সরাসরি কল করুন।');
+      }
+    } catch (err) {
+      console.error('Contact submission error:', err);
+      setSubmitError('সার্ভারে সংযোগ করা সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট সংযোগ পরীক্ষা করুন বা হটলাইনে কল করুন।');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -356,6 +386,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                         </div>
 
                         <div>
+                          <label className="block text-xs font-bold text-[#0B192C] mb-1">ইমেইল ঠিকানা</label>
+                          <input
+                            type="email"
+                            placeholder="example@press.com"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
                           <label className="block text-xs font-bold text-[#0B192C] mb-1">সাক্ষাতের মাধ্যম</label>
                           <select
                             value={formData.meetingFormat}
@@ -366,6 +409,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                             <option>বাংলাবাজার প্রধান অফিসে সরাসরি</option>
                             <option>কাওরান বাজার টেকনোলজি অফিসে</option>
                             <option>ফোনে সরাসরি বিস্তারিত আলোচনা</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-[#0B192C] mb-1">বইয়ের ক্যাটালগ সাইজ</label>
+                          <select
+                            value={formData.catalogSize}
+                            onChange={(e) => setFormData({ ...formData, catalogSize: e.target.value })}
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none bg-white font-medium"
+                          >
+                            <option>১ - ৫০টি বই</option>
+                            <option>৫০ - ৫০০টি বই</option>
+                            <option>৫০০ - ৫,০০০টি বই</option>
+                            <option>৫,০০০+ বই (আনলিমিটেড)</option>
                           </select>
                         </div>
                       </div>
@@ -382,12 +439,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                       </div>
                     </div>
 
+                    {submitError && (
+                      <div className="rounded-xl bg-red-50 border border-red-200 p-3 text-xs text-red-700 font-medium">
+                        {submitError}
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full py-3.5 rounded-xl bg-[#064E3B] text-white text-xs font-bold hover:bg-[#043E2F] shadow-md shadow-[#064E3B]/20 transition-all flex items-center justify-center gap-2"
+                      disabled={isSubmitting}
+                      className="w-full py-3.5 rounded-xl bg-[#064E3B] text-white text-xs font-bold hover:bg-[#043E2F] shadow-md shadow-[#064E3B]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <span>{activeFormTab === 'demo' ? 'ডেমো সময় নিশ্চিত করুন' : activeFormTab === 'meeting' ? 'মিটিং কনফার্ম করুন' : 'টিকিট সাবমিট করুন'}</span>
-                      <span className="text-amber-300 font-normal">({selectedDate} নভেম্বর, {selectedTime})</span>
+                      {isSubmitting ? (
+                        <div className="flex items-center gap-2">
+                          <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                          <span>ইমেইল পাঠানো হচ্ছে...</span>
+                        </div>
+                      ) : (
+                        <>
+                          <span>{activeFormTab === 'demo' ? 'ডেমো সময় নিশ্চিত করুন' : activeFormTab === 'meeting' ? 'মিটিং কনফার্ম করুন' : 'টিকিট সাবমিট করুন'}</span>
+                          <span className="text-amber-300 font-normal">({selectedDate} নভেম্বর, {selectedTime})</span>
+                        </>
+                      )}
                     </button>
                   </form>
                 )}

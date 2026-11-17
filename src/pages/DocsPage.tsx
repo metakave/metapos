@@ -1,72 +1,99 @@
 import React, { useState } from 'react';
-import { 
-  BookOpen, 
-  Terminal, 
-  Barcode, 
-  Printer, 
-  Calculator, 
-  QrCode, 
-  WifiOff, 
-  Copy, 
-  Check, 
-  Search,
+import {
+  BookOpen,
+  Barcode,
+  Printer,
+  ShoppingCart,
+  Wallet,
+  Package,
+  LineChart,
+  Copy,
+  Check,
   ExternalLink,
-  ChevronRight
+  ChevronRight,
 } from 'lucide-react';
 
+type SectionId = 'getting-started' | 'catalog' | 'hardware' | 'selling' | 'session' | 'stock' | 'reports';
+
+const NAV: { id: SectionId; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
+  { id: 'getting-started', label: '১. সূচনা: কাউন্টার ও ব্যবহারকারী', icon: BookOpen },
+  { id: 'catalog', label: '২. বই ক্যাটালগ ও ISBN', icon: Barcode },
+  { id: 'hardware', label: '৩. স্ক্যানার ও প্রিন্টার', icon: Printer },
+  { id: 'selling', label: '৪. কাউন্টারে বিক্রি ও পেমেন্ট', icon: ShoppingCart },
+  { id: 'session', label: '৫. সেশন খোলা-বন্ধ ও ক্যাশ গণনা', icon: Wallet },
+  { id: 'stock', label: '৬. স্টক অন হ্যান্ড', icon: Package },
+  { id: 'reports', label: '৭. ড্যাশবোর্ড ও রিপোর্ট', icon: LineChart },
+];
+
+const Section: React.FC<{ n: string; title: string; intro: string; children: React.ReactNode }> = ({ n, title, intro, children }) => (
+  <div className="space-y-5">
+    <div className="border-b border-[#0B192C]/10 pb-4">
+      <span className="text-xs font-bold text-[#064E3B] uppercase">অধ্যায় {n}</span>
+      <h2 className="text-2xl font-bold text-[#0B192C] mt-1">{title}</h2>
+    </div>
+    <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">{intro}</p>
+    {children}
+  </div>
+);
+
+const Steps: React.FC<{ title?: string; items: React.ReactNode[] }> = ({ title = 'ধাপসমূহ:', items }) => (
+  <div className="rounded-xl bg-[#FAF9F5] p-4 border border-[#0B192C]/10 space-y-3">
+    <h4 className="text-xs font-bold text-[#0B192C] uppercase tracking-wide">{title}</h4>
+    <ol className="list-decimal list-inside space-y-2 text-xs text-[#0B192C] font-semibold">
+      {items.map((it, i) => (
+        <li key={i}>{it}</li>
+      ))}
+    </ol>
+  </div>
+);
+
+const Tiles: React.FC<{ items: [string, string][] }> = ({ items }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+    {items.map(([h, p]) => (
+      <div key={h} className="rounded-xl border border-[#0B192C]/10 p-4 bg-[#FAF9F5] space-y-2">
+        <h4 className="font-bold text-[#0B192C]">{h}</h4>
+        <p className="text-[#0B192C]/70 font-medium">{p}</p>
+      </div>
+    ))}
+  </div>
+);
+
 export const DocsPage: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<'getting-started' | 'catalog' | 'hardware' | 'mela' | 'royalty' | 'payments'>('getting-started');
-  const [copiedCode, setCopiedCode] = useState(false);
+  const [active, setActive] = useState<SectionId>('getting-started');
+  const [copied, setCopied] = useState(false);
 
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedCode(true);
-    setTimeout(() => setCopiedCode(false), 2000);
+  const copy = (text: string) => {
+    navigator.clipboard?.writeText(text).catch(() => {});
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
-
-  const navItems = [
-    { id: 'getting-started', label: '১. সূচনা ও প্রকাশনী সেটআপ', icon: BookOpen },
-    { id: 'catalog', label: '২. বই ক্যাটালগ ও ISBN-13 এন্ট্রি', icon: Barcode },
-    { id: 'hardware', label: '৩. স্ক্যানার ও থার্মাল প্রিন্টার সংযোগ', icon: Printer },
-    { id: 'mela', label: '৪. একুশে বইমেলা অফলাইন মোড গাইড', icon: WifiOff },
-    { id: 'royalty', label: '৫. লেখক রয়্যালটি চুক্তি ও লেজার', icon: Calculator },
-    { id: 'payments', label: '৬. বিকাশ কিউআর ও কুরিয়ার এপিআই', icon: QrCode },
-  ];
 
   return (
     <div className="pt-28 pb-24 bg-[#FBFBFA]">
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
-        {/* Header */}
         <div className="max-w-3xl mb-10">
           <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#064E3B]/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#064E3B] mb-3">
             ব্যবহার নির্দেশিকা (User Documentation)
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#0B192C]">
-            MetaPOS প্রকাশনা নির্দেশিকা ও সহায়িকা
-          </h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#0B192C]">MetaPOS ব্যবহার নির্দেশিকা</h1>
           <p className="mt-2 text-sm sm:text-base text-[#0B192C]/80 font-medium">
-            কাউন্টার সেটআপ, বইমেলার অফলাইন কনফিগারেশন, লেখক রয়্যালটি এবং কুরিয়ার ইন্টিগ্রেশনের ধাপে ধাপে গাইড।
+            কাউন্টার সেটআপ, বই ক্যাটালগ, বিক্রি, সেশন বন্ধ, স্টক ও রিপোর্ট — ধাপে ধাপে।
           </p>
         </div>
 
-        {/* Documentation Layout (Sidebar + Main Content) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Sidebar Navigation (4 cols) */}
-          <div className="lg:col-span-4 rounded-2xl border-2 border-[#0B192C]/10 bg-white p-4 space-y-1 shadow-xs sticky top-28">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#0B192C]/60 px-3 py-2">
-              নির্দেশিকা সূচিপত্র
-            </p>
-            {navItems.map((item) => {
+          <nav className="lg:col-span-4 rounded-2xl border-2 border-[#0B192C]/10 bg-white p-4 space-y-1 shadow-xs lg:sticky lg:top-28">
+            <p className="text-xs font-bold uppercase tracking-wider text-[#0B192C]/60 px-3 py-2">নির্দেশিকা সূচিপত্র</p>
+            {NAV.map((item) => {
               const Icon = item.icon;
-              const isSelected = activeSection === item.id;
+              const isSelected = active === item.id;
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveSection(item.id as any)}
+                  onClick={() => setActive(item.id)}
+                  aria-current={isSelected ? 'page' : undefined}
                   className={`w-full flex items-center justify-between p-3 rounded-xl text-xs font-bold transition-all text-left ${
-                    isSelected
-                      ? 'bg-[#064E3B] text-white shadow-xs'
-                      : 'text-[#0B192C] hover:bg-[#FAF9F5]'
+                    isSelected ? 'bg-[#064E3B] text-white shadow-xs' : 'text-[#0B192C] hover:bg-[#FAF9F5]'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
@@ -79,9 +106,7 @@ export const DocsPage: React.FC = () => {
             })}
 
             <div className="pt-4 border-t border-[#0B192C]/10 mt-3 px-3">
-              <p className="text-[11px] text-[#0B192C]/70 font-semibold">
-                সরাসরি সহায়তার প্রয়োজন?
-              </p>
+              <p className="text-[11px] text-[#0B192C]/70 font-semibold">সরাসরি সহায়তার প্রয়োজন?</p>
               <a
                 href="https://wa.me"
                 target="_blank"
@@ -92,157 +117,142 @@ export const DocsPage: React.FC = () => {
                 <ExternalLink className="h-3 w-3" />
               </a>
             </div>
-          </div>
+          </nav>
 
-          {/* Main Content Area (8 cols) */}
           <div className="lg:col-span-8 rounded-2xl border-2 border-[#0B192C]/10 bg-white p-6 sm:p-8 shadow-xs space-y-6">
-            {/* Section 1: Getting Started */}
-            {activeSection === 'getting-started' && (
-              <div className="space-y-5">
-                <div className="border-b border-[#0B192C]/10 pb-4">
-                  <span className="text-xs font-bold text-[#064E3B] uppercase">অধ্যায় ০১</span>
-                  <h2 className="text-2xl font-bold text-[#0B192C] mt-1">সূচনা ও প্রকাশনী সেটআপ</h2>
-                </div>
-                <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">
-                  MetaPOS ব্যবহারের শুরুতে আপনার প্রকাশনীর মৌলিক তথ্য, বাংলাবাজার বা শোরুমের ঠিকানা, ক্যাশ ড্রয়ার এবং ব্যবহারকারী সেলস কর্মীদের প্রোফাইল কনফিগার করতে হয়।
-                </p>
-
-                <div className="rounded-xl bg-[#FAF9F5] p-4 border border-[#0B192C]/10 space-y-3">
-                  <h4 className="text-xs font-bold text-[#0B192C] uppercase tracking-wide">প্রাথমিক ধাপসমূহ:</h4>
-                  <ol className="list-decimal list-inside space-y-2 text-xs text-[#0B192C] font-semibold">
-                    <li>ড্যাশবোর্ডের <strong>সেটিংস &gt; প্রকাশনী প্রোফাইল</strong>-এ গিয়ে নাম ও ট্রেড লাইসেন্স বা ভ্যাট নম্বর যোগ করুন।</li>
-                    <li>বইমেলা বা শোরুমের ক্যাশ মেমোতে যে লোগো ও হেডার প্রিন্ট হবে তা আপলোড করুন।</li>
-                    <li>সেলস কর্মী ও ক্যাশিয়ারদের আলাদা পিন নম্বর (PIN) সেট করে দিন।</li>
-                  </ol>
-                </div>
-              </div>
+            {active === 'getting-started' && (
+              <Section
+                n="০১"
+                title="সূচনা: কাউন্টার ও ব্যবহারকারী"
+                intro="প্রতিটি বিক্রয়স্থল (বইমেলার স্টল, শোরুমের ডেস্ক) MetaPOS-এ একটি করে 'কাউন্টার'। প্রতিটি কাউন্টারের নিজস্ব সেশন, পেমেন্ট পদ্ধতি ও বইমেলা মোড সেটিং থাকে।"
+              >
+                <Steps
+                  items={[
+                    <>কাউন্টার তালিকা থেকে নতুন কাউন্টার তৈরি করুন (যেমন: "বই ঘর - কাউন্টার ১")।</>,
+                    <>কাউন্টারের সেটিংসে <strong>বইমেলা মোড</strong> ডিফল্টভাবে চালু থাকে — স্টলের জন্য এটাই রাখুন।</>,
+                    <>ক্যাশ ও কার্ড পেমেন্ট পদ্ধতি যুক্ত আছে কি না দেখে নিন।</>,
+                    <>
+                      ক্যাশিয়ারদের <strong>পিওএস ব্যবহারকারী</strong> এবং ম্যানেজারদের <strong>পিওএস অ্যাডমিনিস্ট্রেটর</strong> হিসেবে যুক্ত
+                      করুন — ক্যাটালগ সম্পাদনা ও ড্যাশবোর্ড শুধু ম্যানেজাররা দেখবেন।
+                    </>,
+                  ]}
+                />
+              </Section>
             )}
 
-            {/* Section 2: Catalog & ISBN */}
-            {activeSection === 'catalog' && (
-              <div className="space-y-5">
-                <div className="border-b border-[#0B192C]/10 pb-4">
-                  <span className="text-xs font-bold text-[#064E3B] uppercase">অধ্যায় ০২</span>
-                  <h2 className="text-2xl font-bold text-[#0B192C] mt-1">বই ক্যাটালগ ও ISBN-13 এন্ট্রি</h2>
-                </div>
-                <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">
-                  প্রতিটি বইয়ের শিরোনাম, লেখক, অনুবাদক/সম্পাদক, জাতীয় গ্রন্থকেন্দ্রের ক্যাটাগরি এবং বাংলাদেশ ও আন্তর্জাতিক ISBN-13 কোড সিস্টেমে সংরক্ষণ করা হয়।
-                </p>
-
+            {active === 'catalog' && (
+              <Section
+                n="০২"
+                title="বই ক্যাটালগ ও ISBN"
+                intro="প্রতিটি বই শিরোনাম, লেখক (একাধিক হতে পারে), প্রকাশক, ধরন, সিরিজ, সংস্করণ, ভাষা, ফরম্যাট, পৃষ্ঠা, প্রকাশকাল, মূল্য ও প্রচ্ছদসহ সংরক্ষিত থাকে। ISBN-ই বইয়ের বারকোড।"
+              >
+                <Steps
+                  items={[
+                    <>ক্যাটালগ → বই → নতুন। ISBN-10 বা ISBN-13 লিখুন — হাইফেনসহ বা ছাড়া।</>,
+                    <>সিস্টেম চেক ডিজিট যাচাই করে ISBN-13 হিসেবে রাখে, ISBN-10 দেখায় এবং বারকোডে ISBN বসিয়ে দেয়। একই ISBN দুবার নেয় না।</>,
+                    <>
+                      <strong>ISBN থেকে তথ্য আনুন</strong> চাপলে Open Library থেকে শিরোনাম, লেখক, প্রকাশক, পৃষ্ঠা, প্রকাশকাল ও প্রচ্ছদ পূরণ হয়
+                      (সার্ভারে ইন্টারনেট লাগে; দেশি অনেক বই Open Library-তে না-ও থাকতে পারে, তখন হাতে লিখুন)।
+                    </>,
+                    <>অনেক বই একসাথে তুলতে বইয়ের তালিকা থেকে এক্সেল/CSV ইমপোর্ট ব্যবহার করুন।</>,
+                  ]}
+                />
                 <div className="rounded-xl bg-[#0B192C] text-white p-4 font-mono text-xs space-y-2">
                   <div className="flex justify-between items-center text-slate-400 border-b border-slate-700 pb-2">
-                    <span>নমুনা ISBN-13 ফরম্যাট ও মেটাডাটা</span>
-                    <button
-                      onClick={() => handleCopy('978-984-701-023-1')}
-                      className="flex items-center gap-1 text-[11px] text-emerald-400 hover:text-white"
-                    >
-                      {copiedCode ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-                      <span>{copiedCode ? 'কপি হয়েছে' : 'কপি করুন'}</span>
+                    <span>নমুনা: একই বই, দুই রকম ISBN</span>
+                    <button onClick={() => copy('9780140449136')} className="flex items-center gap-1 text-[11px] text-emerald-400 hover:text-white">
+                      {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                      <span>{copied ? 'কপি হয়েছে' : 'ISBN-13 কপি করুন'}</span>
                     </button>
                   </div>
-                  <pre className="text-slate-300 text-[11px] leading-relaxed">
-{`ISBN: 978-984-701-023-1
-শিরোনাম: চিলেকোঠার সেপাই (হার্ডবাউন্ড)
-লেখক: আখতারুজ্জামান ইলিয়াস
-গায়ের দাম: ৳৫৫০
-ফর্মা সংখ্যা: ১২ ফর্মা (৮০ গ্রাম ডিমাই অফসেট)
-রয়্যালটি রেট: ১২% গায়ের দাম`}
+                  <pre className="text-slate-300 text-[11px] leading-relaxed whitespace-pre-wrap">
+{`লিখেছেন:   0-14-044913-2      (ISBN-10)
+সংরক্ষিত:  9780140449136      (ISBN-13 = বারকোড)
+দেখায়:     ISBN-10 0140449132`}
                   </pre>
                 </div>
-              </div>
+              </Section>
             )}
 
-            {/* Section 3: Hardware Setup */}
-            {activeSection === 'hardware' && (
-              <div className="space-y-5">
-                <div className="border-b border-[#0B192C]/10 pb-4">
-                  <span className="text-xs font-bold text-[#064E3B] uppercase">অধ্যায় ০৩</span>
-                  <h2 className="text-2xl font-bold text-[#0B192C] mt-1">স্ক্যানার ও থার্মাল প্রিন্টার সংযোগ</h2>
-                </div>
-                <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">
-                  MetaPOS যেকোনো সাধারণ কম্পিউটার, ল্যাপটপ, অ্যান্ড্রয়েড ট্যাব বা টাচস্ক্রিন পিওএস মেশিনে সরাসরি কাজ করে। কোনো অতিরিক্ত সফটওয়্যার ড্রাইভারের প্রয়োজন নেই।
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="rounded-xl border border-[#0B192C]/10 p-4 bg-[#FAF9F5] space-y-2">
-                    <h4 className="font-bold text-[#0B192C]">ইউএসবি ও ওয়্যারলেস বারকোড স্ক্যানার</h4>
-                    <p className="text-[#0B192C]/70 font-medium">স্ক্যানার ইউএসবি পোর্টে প্লাগ করলেই তা স্বয়ংক্রিয়ভাবে কীবোর্ড ইনপুট হিসেবে বই স্ক্যান করতে শুরু করবে।</p>
-                  </div>
-                  <div className="rounded-xl border border-[#0B192C]/10 p-4 bg-[#FAF9F5] space-y-2">
-                    <h4 className="font-bold text-[#0B192C]">৫৮ মিমি / ৮০ মিমি থার্মাল প্রিন্টার</h4>
-                    <p className="text-[#0B192C]/70 font-medium">ব্লুটুথ বা ইউএসবি ক্যাবল দিয়ে প্রিন্টার কানেক্ট করে ব্রাউজার প্রিন্ট ডায়ালগ থেকে সরাসরি রিসিট বের করুন।</p>
-                  </div>
-                </div>
-              </div>
+            {active === 'hardware' && (
+              <Section
+                n="০৩"
+                title="স্ক্যানার ও প্রিন্টার"
+                intro="MetaPOS ব্রাউজারে চলে — কম্পিউটার, ল্যাপটপ বা ট্যাবলেটে আলাদা সফটওয়্যার ইনস্টল ছাড়াই।"
+              >
+                <Tiles
+                  items={[
+                    ['ইউএসবি ও ওয়্যারলেস বারকোড স্ক্যানার', 'স্ক্যানার কীবোর্ডের মতো কাজ করে — প্লাগ করে কাউন্টার স্ক্রিনে বইয়ের ISBN স্ক্যান করলেই বই অর্ডারে ওঠে।'],
+                    ['রিসিট প্রিন্টার', 'পেমেন্টের পর রিসিট ব্রাউজারের প্রিন্ট ডায়ালগ দিয়ে যেকোনো প্রিন্টারে (৫৮/৮০ মিমি থার্মাল সহ) প্রিন্ট করুন। রিসিটে বইয়ের নিচে লেখকের নাম থাকে।'],
+                  ]}
+                />
+              </Section>
             )}
 
-            {/* Section 4: Boi Mela Offline Mode */}
-            {activeSection === 'mela' && (
-              <div className="space-y-5">
-                <div className="border-b border-[#0B192C]/10 pb-4">
-                  <span className="text-xs font-bold text-[#831843] uppercase">অধ্যায় ০৪</span>
-                  <h2 className="text-2xl font-bold text-[#0B192C] mt-1">অমর একুশে বইমেলা অফলাইন মোড গাইড</h2>
+            {active === 'selling' && (
+              <Section n="০৪" title="কাউন্টারে বিক্রি ও পেমেন্ট" intro="বই স্ক্যান বা খুঁজে অর্ডারে যোগ করুন, প্রয়োজনে ছাড় দিন, তারপর পেমেন্ট নিন।">
+                <Steps
+                  items={[
+                    <>ISBN স্ক্যান করুন, অথবা শিরোনাম, লেখক, প্রকাশক, ধরন, সিরিজ বা ISBN-এর অংশ লিখে খুঁজুন।</>,
+                    <>অর্ডার লাইন বেছে নিয়ে নামপ্যাডে পরিমাণ বা ছাড় (%) বসান।</>,
+                    <>পেমেন্টে ক্যাশ বা কার্ড বেছে নিন; একাধিক পদ্ধতিতে ভাগ করে নেওয়া যায় এবং ফেরত টাকার হিসাব নিজেই হয়।</>,
+                    <>বই ফেরত এলে আগের অর্ডার খুঁজে রিফান্ড করুন — স্টকে কপি আবার যোগ হয়।</>,
+                  ]}
+                />
+                <div className="rounded-xl border-2 border-[#D97706]/30 bg-[#FFFBEB] p-4 text-xs text-[#78350F] font-semibold">
+                  বিকাশ বা নগদে টাকা নিতে চাইলে সেটিংসে ওই নামে আলাদা পেমেন্ট পদ্ধতি যোগ করুন। গ্রাহক নিজের ফোন থেকে টাকা পাঠানোর পর ক্যাশিয়ার
+                  সেই পদ্ধতি বেছে নেন — বিকাশ/নগদের সাথে স্বয়ংক্রিয় সংযোগ নেই, তবে রিপোর্টে পদ্ধতিভিত্তিক হিসাব আলাদা দেখা যায়।
                 </div>
-                <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">
-                  বইমেলা প্রাঙ্গণে (সোহরাওয়ার্দী উদ্যান বা বাংলা একাডেমি) মোবাইল ডাটা জ্যাম হওয়া সাধারণ ঘটনা। অফলাইন মোডে মেলা স্টলে বিক্রয় সচল রাখার নিয়মাবলী:
-                </p>
-
-                <div className="rounded-xl border-2 border-[#D97706]/30 bg-[#FFFBEB] p-4 text-xs space-y-2 text-[#78350F]">
-                  <p className="font-bold">⚠️ বইমেলার শুরুর আগে করণীয়:</p>
-                  <ul className="list-disc list-inside space-y-1 font-semibold">
-                    <li>মেলায় যাওয়ার আগে সকালে ইন্টারনেট সংযোগ থাকা অবস্থায় টার্মিনাল লগইন করে নিন।</li>
-                    <li>সমস্ত বইয়ের ক্যাটালগ ও মূল্য স্বয়ংক্রিয়ভাবে আপনার ডিভাইসের লোকাল মেমোরিতে সেভ হয়ে যাবে।</li>
-                    <li>সারাদিন ইন্টারনেট ছাড়া মেলা স্টলে ক্যাশ মেমো কাটুন; রাতে সংযোগ পেলেই সব ডাটা অটোমেটিক ব্যাকআপ হয়ে যাবে।</li>
-                  </ul>
-                </div>
-              </div>
+              </Section>
             )}
 
-            {/* Section 5: Author Royalty */}
-            {activeSection === 'royalty' && (
-              <div className="space-y-5">
-                <div className="border-b border-[#0B192C]/10 pb-4">
-                  <span className="text-xs font-bold text-[#064E3B] uppercase">অধ্যায় ০৫</span>
-                  <h2 className="text-2xl font-bold text-[#0B192C] mt-1">লেখক রয়্যালটি চুক্তি ও লেজার</h2>
-                </div>
-                <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">
-                  প্রকাশক ও লেখকের মাঝে শতভাগ আস্থা ও স্বচ্ছতা বজায় রাখতে স্বয়ংক্রিয় রয়্যালটি ক্যালকুলেশন ইঞ্জিন ব্যবহৃত হয়।
-                </p>
-
-                <div className="rounded-xl bg-[#FAF9F5] p-4 border border-[#0B192C]/10 space-y-3 text-xs">
-                  <div className="flex justify-between font-bold text-[#0B192C]">
-                    <span>টায়ার্ড চুক্তি কনফিগারেশন ফর্মুলা:</span>
-                    <span className="text-[#064E3B]">অটো-ক্যালকুলেটেড</span>
-                  </div>
-                  <p className="text-[#0B192C]/70 font-medium">
-                    উদাহরণ: প্রথম ২,৫০০ কপি পর্যন্ত ১০%, ২,৫০১ থেকে ৫,০০০ কপি পর্যন্ত ১২.৫% এবং ৫,০০১ কপির ওপরে ১৫% রয়্যালটি। সিস্টেম প্রতি কপি বিক্রয় অনুযায়ী স্বয়ংক্রিয়ভাবে স্ল্যাব পরিবর্তন করবে।
-                  </p>
-                </div>
-              </div>
+            {active === 'session' && (
+              <Section
+                n="০৫"
+                title="সেশন খোলা-বন্ধ ও ক্যাশ গণনা"
+                intro="প্রতিদিনের বিক্রি একটি সেশনে থাকে। সেশন বন্ধের সময় গোনা টাকা প্রত্যাশিত টাকার সাথে মেলানো হয়।"
+              >
+                <Steps
+                  items={[
+                    <>কাউন্টার খুলুন এবং ড্রয়ারের শুরুর ক্যাশ (ফ্লোট) লিখুন।</>,
+                    <>দিনশেষে সেশন বন্ধ করুন ও ড্রয়ারের টাকা গুনে লিখুন।</>,
+                    <>বইমেলা মোডে কোনো জার্নাল এন্ট্রি হয় না; গোনা ও প্রত্যাশিত টাকার পার্থক্য সেশনের নোটে লেখা থাকে।</>,
+                  ]}
+                />
+              </Section>
             )}
 
-            {/* Section 6: Payments & Couriers */}
-            {activeSection === 'payments' && (
-              <div className="space-y-5">
-                <div className="border-b border-[#0B192C]/10 pb-4">
-                  <span className="text-xs font-bold text-[#064E3B] uppercase">অধ্যায় ০৬</span>
-                  <h2 className="text-2xl font-bold text-[#0B192C] mt-1">বিকাশ কিউআর ও কুরিয়ার এপিআই</h2>
-                </div>
-                <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">
-                  সরাসরি বিকাশ মার্চেন্ট কিউআর কোড স্ক্রিনে প্রদর্শন এবং Steadfast, Pathao ও RedX কুরিয়ার এপিআই সংযোগ করে এক ক্লিকে পার্সেল বুকিং।
-                </p>
+            {active === 'stock' && (
+              <Section
+                n="০৬"
+                title="স্টক অন হ্যান্ড"
+                intro="প্রতিটি বইয়ের একটি মাত্র সংখ্যা — হাতে কত কপি আছে। গুদাম, লোকেশন বা চালান নেই।"
+              >
+                <Steps
+                  items={[
+                    <>মেলা বা শোরুম শুরুর আগে ক্যাটালগ → স্টক অন হ্যান্ড তালিকায় প্রতিটি বইয়ের গোনা কপি বসান।</>,
+                    <>প্রতিটি বিক্রিতে কপি কমে, রিফান্ডে বাড়ে; কাউন্টারে বইয়ের কার্ডে বাকি কপি দেখা যায়।</>,
+                    <>হাতে করা প্রতিটি পরিবর্তন বইয়ের ইতিহাসে (লগ) থাকে — কে, কখন, কত থেকে কত।</>,
+                  ]}
+                />
+              </Section>
+            )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="rounded-xl border border-[#0B192C]/10 p-4 bg-[#FAF9F5] space-y-2">
-                    <h4 className="font-bold text-[#BE185D]">বিকাশ ডায়নামিক QR</h4>
-                    <p className="text-[#0B192C]/70 font-medium">সেটিংস থেকে আপনার বিকাশ মার্চেন্ট নম্বর বা কিউআর কোড আপলোড করুন। টার্মিনালের বিকাশ বোতাম চাপলে স্ক্রিনে স্ক্যান কিউআর চলে আসবে।</p>
-                  </div>
-                  <div className="rounded-xl border border-[#0B192C]/10 p-4 bg-[#FAF9F5] space-y-2">
-                    <h4 className="font-bold text-[#064E3B]">Steadfast / Pathao এপিআই কি</h4>
-                    <p className="text-[#0B192C]/70 font-medium">কুরিয়ার অ্যাকাউন্টের API Key ও Secret দিয়ে দিন। অনলাইন অর্ডার আসার সাথে সাথেই কনসাইনমেন্ট ট্র্যাকিং আইডি সহ ডেলিভারি চালান তৈরি হবে।</p>
-                  </div>
-                </div>
-              </div>
+            {active === 'reports' && (
+              <Section
+                n="০৭"
+                title="ড্যাশবোর্ড ও রিপোর্ট"
+                intro="বইমেলা → ড্যাশবোর্ড থেকে সময়সীমা (আজ, গতকাল, ৭ দিন, ৩০ দিন, এই মাস, এই বছর বা কাস্টম) ও এক বা একাধিক কাউন্টার বেছে নিন।"
+              >
+                <Tiles
+                  items={[
+                    ['মূল সংখ্যা', 'আয়, অর্ডার, বিক্রিত বই, গড় বাস্কেট, ভিন্ন শিরোনাম, অর্ডারপ্রতি বই, প্রদত্ত ছাড় ও ফেরত — আগের সময়ের সাথে তুলনা।'],
+                    ['চার্ট ও তালিকা', 'দৈনিক আয়, ঘণ্টাপ্রতি অর্ডার, শীর্ষ ১০ বই, শীর্ষ লেখক ও প্রকাশক, ধরনভিত্তিক আয়, পেমেন্ট পদ্ধতি, ক্যাশিয়ার পারফরম্যান্স ও সেশন।'],
+                    ['বই বিক্রয় বিশ্লেষণ', 'রিপোর্টিং মেনুতে পিভট, গ্রাফ ও তালিকা — শিরোনাম, লেখক, প্রকাশক, ধরন, ফরম্যাট, ক্যাশিয়ার, কাউন্টার, সেশন বা দিন অনুযায়ী।'],
+                    ['এক্সপোর্ট', 'পিভট বা তালিকা থেকে সরাসরি Excel ফাইলে নামিয়ে নিন।'],
+                  ]}
+                />
+              </Section>
             )}
           </div>
         </div>

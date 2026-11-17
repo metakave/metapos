@@ -426,7 +426,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                         <label className="block text-xs font-bold text-[#0B192C] mb-1">বিশেষ কোনো আগ্রহ বা বইমেলা সংক্রান্ত নোট</label>
                         <textarea
                           rows={2}
-                          placeholder="যেমন: বইমেলার অফলাইন টার্মিনাল সেটআপ, লেখক রয়্যালটি মডিউল বা কুরিয়ার ইন্টিগ্রেশন..."
+                          placeholder="যেমন: বইমেলার কয়টি কাউন্টার, ক্যাটালগে কত বই, এক্সেল থেকে ইমপোর্ট..."
                           value={formData.notes}
                           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                           className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
@@ -500,7 +500,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                     হাতে ট্যাবলেট বা ফোনে যেকোনো কর্মীর হাতে সম্পূর্ণ ক্যাশ কাউন্টার।
                   </h3>
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    অফলাইনে বিলিং, কিউআর স্ক্যানে পেমেন্ট এবং ২ সেকেন্ডে ক্যাশ মেমো প্রিন্ট।
+                    ISBN স্ক্যানে বিক্রি, বইয়ের কার্ডে বাকি কপি এবং লেখকের নামসহ রিসিট প্রিন্ট।
                   </p>
                 </div>
               </div>
@@ -529,7 +529,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                   ইতিমধ্যেই MetaPOS ব্যবহার করছেন? (Already a customer?)
                 </span>
                 <p className="text-xs sm:text-sm text-[#0B192C]/80 font-medium">
-                  আপনার কাউন্টার অর্ডার, বইমেলা স্টক ও লেখক রয়্যালটি খাতা পরিচালনা করতে লগইন করুন।
+                  আপনার কাউন্টার, বই ক্যাটালগ, স্টক ও বিক্রির ড্যাশবোর্ড পরিচালনা করতে লগইন করুন।
                 </p>
               </div>
 

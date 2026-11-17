@@ -196,7 +196,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
               <label className="block font-bold text-[#0B192C] mb-1">বিশেষ কোনো চাহিদা বা বইমেলা স্টল সম্পর্কিত নোট</label>
               <textarea
                 rows={2}
-                placeholder="যেমন: বইমেলার জন্য ব্লুটুথ থার্মাল প্রিন্টার সংযোগ, লেখক রয়্যালটি বা গুদাম স্টক..."
+                placeholder="যেমন: বইমেলায় কয়টি কাউন্টার লাগবে, থার্মাল প্রিন্টার, ক্যাটালগ ইমপোর্ট..."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 className="w-full rounded-lg border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"

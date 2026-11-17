@@ -25,7 +25,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
             <span className="font-serif italic font-normal text-[#064E3B]">সীমাহীনভাবে।</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#0B192C]/80">
-            প্রতিটি প্ল্যানে রয়েছে ৩০ দিনের ফ্রি ট্রায়াল, কাউন্টার বিলিং, ক্যাটালগ ও লেখক রয়্যালটি ইঞ্জিন — এবং বাৎসরিক পেমেন্টে ১৫% বিশেষ ছাড়।
+            প্রতিটি প্ল্যানে রয়েছে ৩০ দিনের ফ্রি ট্রায়াল, ISBN স্ক্যানে বিক্রি, বই ক্যাটালগ, স্টক ও বিক্রির ড্যাশবোর্ড — এবং বাৎসরিক পেমেন্টে ১৫% বিশেষ ছাড়।
           </p>
 
           {/* Billing Interval Toggle */}

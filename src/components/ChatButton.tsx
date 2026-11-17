@@ -57,7 +57,7 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ onOpenDemo }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       sender: 'bot',
-      text: 'আসসালামু আলাইকুম! MetaPOS বাংলাদেশে আপনাকে স্বাগতম। আপনি কি অমর একুশে বইমেলার অফলাইন কাউন্টার, বাংলাবাজার প্রেস ইনভেন্টরি নাকি লেখক রয়্যালটি নিয়ে জানতে চান?',
+      text: 'আসসালামু আলাইকুম! MetaPOS বাংলাদেশে আপনাকে স্বাগতম। আপনি কি বইমেলার কাউন্টার, বই ক্যাটালগ ও স্টক, নাকি বিক্রির ড্যাশবোর্ড নিয়ে জানতে চান?',
       time: 'এইমাত্র',
     },
   ]);
@@ -226,7 +226,7 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ onOpenDemo }) => {
           <form onSubmit={handleSend} className="p-3 border-t border-[#0B192C]/10 bg-white flex items-center gap-2">
             <input
               type="text"
-              placeholder="বইমেলা কাউন্টার, রয়্যালটি বা দাম সম্পর্কে লিখুন..."
+              placeholder="বইমেলা কাউন্টার, স্টক বা দাম সম্পর্কে লিখুন..."
               value={inputText}
               maxLength={1000}
               onChange={(e) => setInputText(e.target.value)}

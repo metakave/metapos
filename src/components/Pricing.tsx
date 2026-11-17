@@ -23,7 +23,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
             <span className="font-serif italic font-normal text-[#064E3B]">সীমাহীনভাবে।</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#0B192C]/80">
-            প্রতিটি প্ল্যানে রয়েছে ৩০ দিনের ফ্রি ট্রায়াল, কাউন্টার বিলিং, ক্যাটালগ ও লেখক রয়্যালটি ইঞ্জিন — এবং বাৎসরিক পেমেন্টে ১৫% বিশেষ ছাড়।
+            প্রতিটি প্ল্যানে রয়েছে ৭ দিনের ফ্রি ট্রায়াল, কাউন্টার বিলিং, বিস্তারিত ক্যাটালগ ও বিক্রয় বিশ্লেষণ — এবং বাৎসরিক পেমেন্টে ১৫% বিশেষ ছাড়।
           </p>
 
           {/* Billing Interval Toggle */}
@@ -50,7 +50,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
           </div>
         </div>
 
-        {/* Pricing Cards Grid (4 plans: Starter, Growth, Scale, Enterprise) */}
+        {/* Pricing Cards Grid (4 plans: Nexus, Spark, Rise, Titan) */}
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch max-w-7xl mx-auto">
           {PRICING_PLANS.map((plan: Plan) => {
             const price = isAnnual ? plan.priceYearly : plan.priceMonthly;
@@ -125,6 +125,12 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
 
                 {/* Card CTA Button */}
                 <div className="mt-8 pt-4 border-t border-[#0B192C]/10">
+                  <div className="mb-2.5 text-center">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#064E3B] bg-[#ECFDF5] border border-[#064E3B]/20 rounded-full px-3 py-0.5">
+                      <Sparkles className="h-3 w-3 text-[#D97706]" />
+                      <span>{plan.trial || '7 Days Free Trial'}</span>
+                    </span>
+                  </div>
                   <button
                     onClick={() => onOpenDemo(plan.name)}
                     className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${

@@ -38,10 +38,10 @@ export const ComparisonModal: React.FC<ComparisonModalProps> = ({ isOpen, onClos
               <thead>
                 <tr className="border-b-2 border-[#0B192C]/20 text-[#0B192C]">
                   <th className="py-3 px-4 font-bold text-sm w-1/3">ফিচার ক্যাটাগরি</th>
-                  <th className="py-3 px-3 text-center font-bold">Starter (৳১,৯৯৯)</th>
-                  <th className="py-3 px-3 text-center font-bold bg-[#ECFDF5] rounded-t-lg text-[#064E3B] border-x border-[#064E3B]/20">Growth (৳৪,৯৯৯)</th>
-                  <th className="py-3 px-3 text-center font-bold">Scale (৳১৪,৯৯৯)</th>
-                  <th className="py-3 px-3 text-center font-bold">Enterprise (কাস্টম)</th>
+                  <th className="py-3 px-3 text-center font-bold">Nexus (৳১,৯৯০)</th>
+                  <th className="py-3 px-3 text-center font-bold bg-[#ECFDF5] rounded-t-lg text-[#064E3B] border-x border-[#064E3B]/20">Spark (৳৪,৯৯০)</th>
+                  <th className="py-3 px-3 text-center font-bold">Rise (৳১২,৫০০)</th>
+                  <th className="py-3 px-3 text-center font-bold">Titan (কাস্টম)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#0B192C]/10">
@@ -55,10 +55,10 @@ export const ComparisonModal: React.FC<ComparisonModalProps> = ({ isOpen, onClos
                     {category.features.map((item, idx) => (
                       <tr key={idx} className="hover:bg-[#FAF9F5]">
                         <td className="py-3 px-4 text-[#0B192C] font-semibold">{item.name}</td>
-                        <td className="py-3 px-3 text-center">{renderCell(item.starter)}</td>
-                        <td className="py-3 px-3 text-center bg-[#ECFDF5]/60 font-bold border-x border-[#064E3B]/20">{renderCell(item.growth)}</td>
-                        <td className="py-3 px-3 text-center">{renderCell(item.scale)}</td>
-                        <td className="py-3 px-3 text-center">{renderCell(item.enterprise)}</td>
+                        <td className="py-3 px-3 text-center">{renderCell(item.nexus)}</td>
+                        <td className="py-3 px-3 text-center bg-[#ECFDF5]/60 font-bold border-x border-[#064E3B]/20">{renderCell(item.spark)}</td>
+                        <td className="py-3 px-3 text-center">{renderCell(item.rise)}</td>
+                        <td className="py-3 px-3 text-center">{renderCell(item.titan)}</td>
                       </tr>
                     ))}
                   </React.Fragment>
@@ -76,7 +76,7 @@ export const ComparisonModal: React.FC<ComparisonModalProps> = ({ isOpen, onClos
           <button
             onClick={() => {
               onClose();
-              onSelectPlan('Enterprise');
+              onSelectPlan('Titan');
             }}
             className="rounded-xl bg-[#064E3B] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#043E2F]"
           >

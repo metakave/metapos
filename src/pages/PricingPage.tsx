@@ -29,7 +29,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
     },
     {
       q: 'রকমারি, বাতিঘর বা জেলা ডিস্ট্রিবিউটরদের কনসাইনমেন্ট বাকি খাতা কীভাবে নিয়ন্ত্রণ করা যায়?',
-      a: 'Growth এবং Scale প্যাকেজে রয়েছে কনসাইনমেন্ট মডিউল। বিভিন্ন ডিস্ট্রিবিউটরের কাছে কত কপি বই জমা দেওয়া হলো, কত কপি বিক্রয় হলো এবং কত কপি ফেরত এলো—তা পৃথক বাকির খাতা ও চালানে রিকনসিলিয়েশন করা যায়।',
+      a: 'Spark এবং Rise প্যাকেজে রয়েছে কাউন্টারভিত্তিক পূর্ণ হিসাব ও ইনভেন্টরি মডিউল। বিভিন্ন ডিস্ট্রিবিউটরের কাছে কত কপি বই জমা দেওয়া হলো, কত কপি বিক্রয় হলো এবং কত কপি ফেরত এলো—তা পৃথক বাকির খাতা ও চালানে রিকনসিলিয়েশন করা যায়।',
     },
     {
       q: 'আমরা কি পরে যেকোনো সময় প্যাকেজ পরিবর্তন বা মেলা উপলক্ষে অতিরিক্ত কাউন্টার যোগ করতে পারি?',
@@ -49,7 +49,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
             বাংলাদেশের প্রকাশকদের জন্য সাশ্রয়ী ও উন্মুক্ত প্ল্যান।
           </h1>
           <p className="mt-4 text-base sm:text-lg text-[#0B192C]/80">
-            প্রতিটি প্যাকেজে রয়েছে ৩০ দিনের ফ্রি ট্রায়াল এবং বাৎসরিক বিলিংয়ে ১৫% বিশেষ ছাড়।
+            প্রতিটি প্যাকেজে রয়েছে ৭ দিনের ফ্রি ট্রায়াল (7 Days Free Trial) এবং বাৎসরিক বিলিংয়ে ১৫% বিশেষ ছাড়।
           </p>
 
           {/* Billing Toggle */}
@@ -144,6 +144,12 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-[#0B192C]/10">
+                  <div className="mb-2.5 text-center">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#064E3B] bg-[#ECFDF5] border border-[#064E3B]/20 rounded-full px-3 py-0.5">
+                      <Sparkles className="h-3 w-3 text-[#D97706]" />
+                      <span>{plan.trial || '7 Days Free Trial'}</span>
+                    </span>
+                  </div>
                   <button
                     onClick={() => onOpenDemo(plan.name)}
                     className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
@@ -177,10 +183,10 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                 <thead>
                   <tr className="border-b-2 border-[#0B192C]/15 text-[#0B192C] bg-[#FAF9F5]">
                     <th className="py-4 px-5 font-bold text-sm w-1/3">ফিচার বিবরণী</th>
-                    <th className="py-4 px-3 text-center font-bold">Starter (৳১,৯৯৯)</th>
-                    <th className="py-4 px-3 text-center font-bold bg-[#ECFDF5] text-[#064E3B] border-x border-[#064E3B]/20">Growth (৳৪,৯৯৯)</th>
-                    <th className="py-4 px-3 text-center font-bold">Scale (৳১৪,৯৯৯)</th>
-                    <th className="py-4 px-3 text-center font-bold">Enterprise (কাস্টম)</th>
+                    <th className="py-4 px-3 text-center font-bold">Nexus (৳১,৯৯০)</th>
+                    <th className="py-4 px-3 text-center font-bold bg-[#ECFDF5] text-[#064E3B] border-x border-[#064E3B]/20">Spark (৳৪,৯৯০)</th>
+                    <th className="py-4 px-3 text-center font-bold">Rise (৳১২,৫০০)</th>
+                    <th className="py-4 px-3 text-center font-bold">Titan (কাস্টম)</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#0B192C]/10">
@@ -194,10 +200,10 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                       {category.features.map((item, idx) => (
                         <tr key={idx} className="hover:bg-[#FAF9F5]">
                           <td className="py-3 px-5 text-[#0B192C] font-semibold">{item.name}</td>
-                          <td className="py-3 px-3 text-center">{renderCompCell(item.starter)}</td>
-                          <td className="py-3 px-3 text-center bg-[#ECFDF5]/60 font-bold border-x border-[#064E3B]/20">{renderCompCell(item.growth)}</td>
-                          <td className="py-3 px-3 text-center">{renderCompCell(item.scale)}</td>
-                          <td className="py-3 px-3 text-center">{renderCompCell(item.enterprise)}</td>
+                          <td className="py-3 px-3 text-center">{renderCompCell(item.nexus)}</td>
+                          <td className="py-3 px-3 text-center bg-[#ECFDF5]/60 font-bold border-x border-[#064E3B]/20">{renderCompCell(item.spark)}</td>
+                          <td className="py-3 px-3 text-center">{renderCompCell(item.rise)}</td>
+                          <td className="py-3 px-3 text-center">{renderCompCell(item.titan)}</td>
                         </tr>
                       ))}
                     </React.Fragment>

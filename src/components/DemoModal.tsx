@@ -7,7 +7,7 @@ interface DemoModalProps {
   initialPlan?: string;
 }
 
-export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPlan = 'Growth' }) => {
+export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPlan = 'Spark' }) => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -109,7 +109,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
           <form onSubmit={handleSubmit} className="p-6 space-y-4 text-xs">
             <div className="rounded-lg bg-[#FEF3C7] border border-[#D97706]/30 p-3 text-[#78350F] text-[11px] flex items-center justify-between font-medium">
               <span>নির্বাচিত প্যাকেজ: <strong className="text-[#0B192C]">{initialPlan} Plan</strong></span>
-              <span className="font-bold text-[#064E3B]">৩০ দিনের ফ্রি ট্রায়াল</span>
+              <span className="font-bold text-[#064E3B]">৭ দিনের ফ্রি ট্রায়াল</span>
             </div>
 
             <div className="grid grid-cols-2 gap-3">

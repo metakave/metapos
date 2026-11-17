@@ -170,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           {/* Highlight badges */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-[#0B192C]/80">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-[#064E3B]" /> ৩০ দিনের ফ্রি ট্রায়াল (কোনো কার্ডের প্রয়োজন নেই)
+              <CheckCircle2 className="h-4 w-4 text-[#064E3B]" /> ৭ দিনের ফ্রি ট্রায়াল (7 Days Free Trial)
             </span>
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="h-4 w-4 text-[#064E3B]" /> ইন্টারনেট ছাড়াও ১০০% অফলাইন সেলস

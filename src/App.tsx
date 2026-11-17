@@ -23,7 +23,7 @@ function ScrollToTop() {
 
 export function App() {
   const [demoOpen, setDemoOpen] = useState(false);
-  const [selectedPlanForDemo, setSelectedPlanForDemo] = useState<string>('Growth');
+  const [selectedPlanForDemo, setSelectedPlanForDemo] = useState<string>('Spark');
   const [comparisonOpen, setComparisonOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState(false);
 

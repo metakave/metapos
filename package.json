@@ -4,11 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "node --watch server/index.ts",
+    "dev": "node --watch-path=server --watch-path=src/data server/index.ts",
     "build": "tsc -b && tsc -p server/tsconfig.json && vite build",
     "start": "node server/index.ts --production",
     "typecheck": "tsc -b && tsc -p server/tsconfig.json",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed": "node server/seed.ts",
+    "seed:clear": "node server/seed.ts --clear"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { PRICING_PLANS } from '../src/data/publisherData.ts';
 
-const DATA_DIR = path.resolve(process.env.METAPOS_DATA_DIR ?? 'server/data');
+const DATA_DIR = path.resolve(process.env.METAPOS_DATA_DIR ?? 'data');
 fs.mkdirSync(DATA_DIR, { recursive: true });
 
 export const DB_PATH = path.join(DATA_DIR, 'metapos.db');
@@ -100,6 +100,15 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_chat_msg_conv    ON chat_messages(conversation_id, id);
   CREATE INDEX IF NOT EXISTS idx_sessions_user    ON sessions(user_id);
 `);
+
+// Migration: rows created by `npm run seed` are flagged so `npm run seed:clear`
+// can remove exactly those and never touch real data.
+for (const table of ['users', 'leads', 'bookings', 'chat_conversations']) {
+  const cols = db.prepare(`PRAGMA table_info(${table})`).all() as { name: string }[];
+  if (!cols.some((c) => c.name === 'is_demo')) {
+    db.exec(`ALTER TABLE ${table} ADD COLUMN is_demo INTEGER NOT NULL DEFAULT 0`);
+  }
+}
 
 export const now = () => new Date().toISOString();
 

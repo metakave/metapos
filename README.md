@@ -59,7 +59,7 @@ The `server/` folder is a small Express API with a SQLite database. In developme
 |---|---|
 | Admin dashboard | `/admin` — overview charts, demo requests, bookings & support tickets, live chat inbox, user accounts, plan prices |
 | API | `/api/*` (see `server/routes/public.ts` and `server/routes/admin.ts`) |
-| Database | `server/data/metapos.db` (git-ignored; back this file up) |
+| Database | `data/metapos.db` (git-ignored; back this file up) |
 
 **What the website forms now do**
 
@@ -71,13 +71,15 @@ The `server/` folder is a small Express API with a SQLite database. In developme
 
 **First admin login:** on first start the server creates `admin@metapos.local` with a random password and prints it once in the terminal. Change it under *আমার পাসওয়ার্ড*. To choose it yourself, set `ADMIN_EMAIL` / `ADMIN_PASSWORD` before the first start.
 
+**Demo data:** `npm run seed` fills the database with fictional Bangla demo data (≈70 demo requests over the last 45 days, bookings, chats with team replies, and 3 publisher logins with password `demo-publisher-123`). `npm run seed:clear` removes only those demo rows — real data is never touched.
+
 **Environment variables (all optional)**
 
 | Variable | Default | Purpose |
 |---|---|---|
 | `PORT` / `HOST` | `5173` / `localhost` | Where the server listens (use `HOST=0.0.0.0` on a server) |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | generated | First admin account (only used when no admin exists) |
-| `METAPOS_DATA_DIR` | `server/data` | Folder for the SQLite database |
+| `METAPOS_DATA_DIR` | `data` | Folder for the SQLite database |
 | `TRUST_PROXY` | off | Set to `1` behind nginx/Caddy so rate limits and secure cookies see the real client |
 
 **Security notes:** passwords are hashed with scrypt; sessions are random tokens in an HttpOnly, SameSite=Lax cookie (Secure over HTTPS); every non-GET API call must send `X-Requested-With: metapos` (CSRF guard); public forms and login are rate-limited per IP. Serve it over HTTPS in production.

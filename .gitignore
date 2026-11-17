@@ -27,4 +27,4 @@ dist-ssr
 *.tsbuildinfo
 
 # MetaPOS server data (SQLite database)
-server/data/
+data/

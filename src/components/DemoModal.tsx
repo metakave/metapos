@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, BookOpen, Building, Mail, User, Shield, Phone } from 'lucide-react';
+import { X, CheckCircle, BookOpen, Building, Mail, User, Shield, Phone, Loader2, AlertCircle } from 'lucide-react';
+import { api, errorMessage } from '../lib/api';
 
 interface DemoModalProps {
   isOpen: boolean;
@@ -9,8 +10,8 @@ interface DemoModalProps {
 
 export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPlan = 'Spark' }) => {
   const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -26,37 +27,22 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError(null);
-
+    setLoading(true);
+    setError(null);
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          plan: initialPlan,
-          formType: 'demo',
-          catalogSize: formData.activeTitles,
-        }),
-      });
-      const result = await response.json();
-      if (result.success) {
-        setSubmitted(true);
-      } else {
-        setSubmitError(result.error || 'ইমেইল পাঠাতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
-      }
+      await api('/leads', { method: 'POST', body: { ...formData, plan: initialPlan } });
+      setSubmitted(true);
     } catch (err) {
-      console.error('Demo modal error:', err);
-      setSubmitError('সার্ভারে সংযোগ করা সম্ভব হয়নি। সরাসরি কল করুন।');
+      setError(errorMessage(err));
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
   const handleReset = () => {
     setSubmitted(false);
-    setSubmitError(null);
+    setError(null);
+    setFormData((f) => ({ ...f, notes: '' }));
     onClose();
   };
 
@@ -210,33 +196,31 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose, initialPl
               <label className="block font-bold text-[#0B192C] mb-1">বিশেষ কোনো চাহিদা বা বইমেলা স্টল সম্পর্কিত নোট</label>
               <textarea
                 rows={2}
-                placeholder="যেমন: বইমেলার জন্য ব্লুটুথ থার্মাল প্রিন্টার সংযোগ, লেখক রয়্যালটি বা গুদাম স্টক..."
+                placeholder="যেমন: বইমেলায় কয়টি কাউন্টার লাগবে, থার্মাল প্রিন্টার, ক্যাটালগ ইমপোর্ট..."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 className="w-full rounded-lg border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
               />
             </div>
 
-            {submitError && (
-              <div className="rounded-lg bg-red-50 border border-red-200 p-2.5 text-[11px] text-red-700 font-medium">
-                {submitError}
+            {error && (
+              <div
+                role="alert"
+                className="flex items-start gap-2 rounded-lg border border-[#831843]/30 bg-[#FDF2F8] p-2.5 text-[11px] font-semibold text-[#831843]"
+              >
+                <AlertCircle className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                <span>{error}</span>
               </div>
             )}
 
             <div className="pt-2">
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-xl bg-[#064E3B] py-3 text-xs font-bold text-white shadow-md shadow-[#064E3B]/20 hover:bg-[#043E2F] transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={loading}
+                className="w-full rounded-xl bg-[#064E3B] py-3 text-xs font-bold text-white shadow-md shadow-[#064E3B]/20 hover:bg-[#043E2F] transition-all flex items-center justify-center gap-2 disabled:opacity-70"
               >
-                {isSubmitting ? (
-                  <div className="flex items-center gap-2">
-                    <span className="h-3.5 w-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                    <span>ইমেইল পাঠানো হচ্ছে...</span>
-                  </div>
-                ) : (
-                  <span>নিশ্চিত করুন ও ফ্রি ডেমো কল নির্ধারণ করুন</span>
-                )}
+                {loading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
+                {loading ? 'পাঠানো হচ্ছে…' : 'নিশ্চিত করুন ও ফ্রি ডেমো কল নির্ধারণ করুন'}
               </button>
               <p className="mt-2 text-center text-[10px] text-[#0B192C]/60 flex items-center justify-center gap-1 font-semibold">
                 <Shield className="h-3 w-3 text-[#064E3B]" /> কোনো ক্রেডিট কার্ডের প্রয়োজন নেই • সম্পূর্ণ বাংলা সহায়তা

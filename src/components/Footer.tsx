@@ -61,7 +61,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
               </div>
             </Link>
             <p className="text-xs text-[#0B192C]/75 leading-relaxed max-w-sm font-medium">
-              বাংলাদেশের প্রকাশনা ও বুকস্টোর অপারেটিং সিস্টেম — অফলাইন মেলা কাউন্টার, বাংলাবাজার গুদাম ইনভেন্টরি, লেখক রয়্যালটি ও পাঠক হোম ডেলিভারি এক প্ল্যাটফর্মে।
+              বইমেলা ও বইয়ের দোকানের বাংলা পিওএস — ISBN স্ক্যান করে বিক্রি, বই ক্যাটালগ, বাকি কপির হিসাব ও বিক্রির ড্যাশবোর্ড এক প্ল্যাটফর্মে।
             </p>
             <div className="pt-2 text-xs text-[#0B192C]/70 space-y-1">
               <p className="flex items-center gap-1.5 font-bold text-[#0B192C]">
@@ -84,8 +84,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
               <Link to="/pricing" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">মূল্যতালিকা</Link>
               <button onClick={onOpenSignIn} className="text-left text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">লগইন পোর্টাল</button>
               <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">বইমেলা কাউন্টার পিওএস</Link>
-              <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">লেখক রয়্যালটি ইঞ্জিন</Link>
-              <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">MetaPOS Go (অ্যাপ)</Link>
+              <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">বই ক্যাটালগ ও স্টক</Link>
+              <Link to="/products" className="text-xs font-medium text-[#0B192C]/70 hover:text-[#064E3B] transition-colors">বইমেলা ড্যাশবোর্ড</Link>
             </div>
 
             {/* Column 2: Resource */}

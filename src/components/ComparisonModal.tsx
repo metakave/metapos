@@ -19,7 +19,7 @@ export const ComparisonModal: React.FC<ComparisonModalProps> = ({ isOpen, onClos
           <div>
             <h3 className="text-xl font-bold text-white">MetaPOS প্যাকেজ তুলনা (BDT Pricing)</h3>
             <p className="text-xs text-slate-300 mt-0.5">
-              বইমেলা পিওএস, লেখক রয়্যালটি, ক্যাটালগ ও কুরিয়ার ফিচারের বিস্তারিত বিবরণ।
+              বই কাউন্টার, ক্যাটালগ ও স্টক, ড্যাশবোর্ড এবং সাপোর্টের বিস্তারিত তুলনা।
             </p>
           </div>
           <button

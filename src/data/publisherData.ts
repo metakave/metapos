@@ -18,6 +18,8 @@ export interface Plan {
   ctaVariant: 'primary' | 'secondary' | 'outline';
 }
 
+// MetaPOS book counter features tailored for Bangladeshi publishers and book fair stalls.
+// Plans differ by counters, users, catalogue size and the level of setup/support provided.
 export const PRICING_PLANS: Plan[] = [
   {
     id: 'nexus',

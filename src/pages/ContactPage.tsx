@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { api, errorMessage } from '../lib/api';
 import { 
   Phone, 
   MessageCircle, 
@@ -15,8 +16,14 @@ import {
   ShieldCheck, 
   CheckCircle,
   ExternalLink,
-  BookOpen
+  BookOpen,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
+
+// The calendar shows November 2026; dates are stored as ISO yyyy-mm-dd.
+const BOOKING_MONTH = '2026-11';
+const toIsoDate = (day: number) => `${BOOKING_MONTH}-${String(day).padStart(2, '0')}`;
 
 interface ContactPageProps {
   onOpenSignIn?: () => void;
@@ -28,8 +35,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
   const [selectedDate, setSelectedDate] = useState<number>(20); // Nov 20
   const [selectedTime, setSelectedTime] = useState<string>('11:30 AM');
   const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [takenSlots, setTakenSlots] = useState<Set<string>>(new Set());
+
+  const loadTakenSlots = useCallback(() => {
+    api<{ slots: { date: string; time: string }[] }>('/bookings/taken')
+      .then(({ slots }) => setTakenSlots(new Set(slots.map((s) => `${s.date}|${s.time}`))))
+      .catch(() => {});
+  }, []);
+  useEffect(() => {
+    loadTakenSlots();
+  }, [loadTakenSlots]);
+  const isTaken = (day: number, time: string) => takenSlots.has(`${toIsoDate(day)}|${time}`);
 
   // Form Fields
   const [formData, setFormData] = useState({
@@ -63,34 +81,33 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
 
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError(null);
-
+    if (isTaken(selectedDate, selectedTime)) {
+      setError('এই সময়টি ইতিমধ্যে বুক হয়ে গেছে। অনুগ্রহ করে অন্য সময় বেছে নিন।');
+      return;
+    }
+    setLoading(true);
+    setError(null);
     try {
-      const response = await fetch('/api/contact', {
+      await api('/bookings', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+        body: {
+          kind: activeFormTab,
+          date: toIsoDate(selectedDate),
+          time: selectedTime,
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          pressName: formData.pressName,
+          meetingFormat: formData.meetingFormat,
+          notes: formData.notes,
         },
-        body: JSON.stringify({
-          ...formData,
-          selectedDate,
-          selectedTime,
-          formType: activeFormTab,
-        }),
       });
-
-      const result = await response.json();
-      if (result.success) {
-        setSubmitted(true);
-      } else {
-        setSubmitError(result.error || 'ইমেইল পাঠাতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন বা সরাসরি কল করুন।');
-      }
+      setSubmitted(true);
     } catch (err) {
-      console.error('Contact submission error:', err);
-      setSubmitError('সার্ভারে সংযোগ করা সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট সংযোগ পরীক্ষা করুন বা হটলাইনে কল করুন।');
+      setError(errorMessage(err));
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
+      loadTakenSlots();
     }
   };
 
@@ -326,13 +343,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 text-xs">
                         {availableTimes.map((time) => {
                           const isSelected = selectedTime === time;
+                          const taken = isTaken(selectedDate, time);
                           return (
                             <button
                               type="button"
                               key={time}
+                              disabled={taken}
+                              title={taken ? 'এই সময়টি বুক হয়ে গেছে' : undefined}
                               onClick={() => setSelectedTime(time)}
                               className={`py-2 rounded-lg border text-center font-bold transition-all ${
-                                isSelected
+                                taken
+                                  ? 'bg-[#F1F3F5] border-[#0B192C]/5 text-[#0B192C]/35 line-through cursor-not-allowed'
+                                  : isSelected
                                   ? 'bg-[#0B192C] text-white border-[#0B192C]'
                                   : 'bg-[#FAF9F5] border-[#0B192C]/10 text-[#0B192C] hover:bg-slate-200'
                               }`}
@@ -431,7 +453,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                         <label className="block text-xs font-bold text-[#0B192C] mb-1">বিশেষ কোনো আগ্রহ বা বইমেলা সংক্রান্ত নোট</label>
                         <textarea
                           rows={2}
-                          placeholder="যেমন: বইমেলার অফলাইন টার্মিনাল সেটআপ, লেখক রয়্যালটি মডিউল বা কুরিয়ার ইন্টিগ্রেশন..."
+                          placeholder="যেমন: বইমেলার কয়টি কাউন্টার, ক্যাটালগে কত বই, এক্সেল থেকে ইমপোর্ট..."
                           value={formData.notes}
                           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                           className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
@@ -439,28 +461,24 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                       </div>
                     </div>
 
-                    {submitError && (
-                      <div className="rounded-xl bg-red-50 border border-red-200 p-3 text-xs text-red-700 font-medium">
-                        {submitError}
+                    {error && (
+                      <div
+                        role="alert"
+                        className="flex items-start gap-2 rounded-xl border border-[#831843]/30 bg-[#FDF2F8] p-3 text-xs font-semibold text-[#831843]"
+                      >
+                        <AlertCircle className="h-4 w-4 shrink-0" />
+                        <span>{error}</span>
                       </div>
                     )}
 
                     <button
                       type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3.5 rounded-xl bg-[#064E3B] text-white text-xs font-bold hover:bg-[#043E2F] shadow-md shadow-[#064E3B]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                      disabled={loading}
+                      className="w-full py-3.5 rounded-xl bg-[#064E3B] text-white text-xs font-bold hover:bg-[#043E2F] shadow-md shadow-[#064E3B]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
                     >
-                      {isSubmitting ? (
-                        <div className="flex items-center gap-2">
-                          <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                          <span>ইমেইল পাঠানো হচ্ছে...</span>
-                        </div>
-                      ) : (
-                        <>
-                          <span>{activeFormTab === 'demo' ? 'ডেমো সময় নিশ্চিত করুন' : activeFormTab === 'meeting' ? 'মিটিং কনফার্ম করুন' : 'টিকিট সাবমিট করুন'}</span>
-                          <span className="text-amber-300 font-normal">({selectedDate} নভেম্বর, {selectedTime})</span>
-                        </>
-                      )}
+                      {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                      <span>{activeFormTab === 'demo' ? 'ডেমো সময় নিশ্চিত করুন' : activeFormTab === 'meeting' ? 'মিটিং কনফার্ম করুন' : 'টিকিট সাবমিট করুন'}</span>
+                      <span className="text-amber-300 font-normal">({selectedDate} নভেম্বর, {selectedTime})</span>
                     </button>
                   </form>
                 )}
@@ -509,7 +527,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                     হাতে ট্যাবলেট বা ফোনে যেকোনো কর্মীর হাতে সম্পূর্ণ ক্যাশ কাউন্টার।
                   </h3>
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    অফলাইনে বিলিং, কিউআর স্ক্যানে পেমেন্ট এবং ২ সেকেন্ডে ক্যাশ মেমো প্রিন্ট।
+                    ISBN স্ক্যানে বিক্রি, বইয়ের কার্ডে বাকি কপি এবং লেখকের নামসহ রিসিট প্রিন্ট।
                   </p>
                 </div>
               </div>
@@ -538,7 +556,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                   ইতিমধ্যেই MetaPOS ব্যবহার করছেন? (Already a customer?)
                 </span>
                 <p className="text-xs sm:text-sm text-[#0B192C]/80 font-medium">
-                  আপনার কাউন্টার অর্ডার, বইমেলা স্টক ও লেখক রয়্যালটি খাতা পরিচালনা করতে লগইন করুন।
+                  আপনার কাউন্টার, বই ক্যাটালগ, স্টক ও বিক্রির ড্যাশবোর্ড পরিচালনা করতে লগইন করুন।
                 </p>
               </div>
 

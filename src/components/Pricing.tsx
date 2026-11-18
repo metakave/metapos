@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Sparkles, ArrowRight } from 'lucide-react';
-import { PRICING_PLANS, Plan } from '../data/publisherData';
+import type { Plan } from '../data/publisherData';
+import { usePlans } from '../lib/usePlans';
 
 interface PricingProps {
   onOpenDemo: (planName?: string) => void;
@@ -9,6 +10,7 @@ interface PricingProps {
 
 export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }) => {
   const [isAnnual, setIsAnnual] = useState(true);
+  const plans = usePlans();
 
   return (
     <section id="pricing" className="py-24 bg-white border-t border-[#0B192C]/10">
@@ -52,7 +54,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
 
         {/* Pricing Cards Grid (4 plans: Nexus, Spark, Rise, Titan) */}
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch max-w-7xl mx-auto">
-          {PRICING_PLANS.map((plan: Plan) => {
+          {plans.map((plan: Plan) => {
             const price = isAnnual ? plan.priceYearly : plan.priceMonthly;
             const isEnterprise = plan.priceMonthly === -1;
 

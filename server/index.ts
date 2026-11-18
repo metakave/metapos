@@ -10,7 +10,7 @@ import { adminRouter } from './routes/admin.ts';
 
 const production = process.argv.includes('--production') || process.env.NODE_ENV === 'production';
 const PORT = Number(process.env.PORT) || 5173;
-const HOST = process.env.HOST || 'localhost';
+const HOST = process.env.HOST || '127.0.0.1';
 
 ensureAdmin();
 purgeExpiredSessions();

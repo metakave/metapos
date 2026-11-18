@@ -1,7 +1,8 @@
 import crypto from 'node:crypto';
 import { Router } from 'express';
 import { db, now, tx } from '../db.ts';
-import { sendNotificationEmail } from '../email.ts';
+import { sendDemoStoreCreatedEmail, sendNotificationEmail } from '../email.ts';
+import { createTenantStore, isSubdomainAvailable, validateSubdomain } from '../tenant.ts';
 import {
   burnPasswordCheck,
   checkPasswordStrength,
@@ -19,6 +20,7 @@ export const publicRouter = Router();
 const submitLimit = rateLimit('submit', 10, 10 * 60_000);
 const loginLimit = rateLimit('login', 10, 15 * 60_000);
 const chatLimit = rateLimit('chat', 30, 5 * 60_000);
+const createStoreLimit = rateLimit('create_store', 6, 15 * 60_000);
 
 const BOOKING_KINDS = ['demo', 'meeting', 'problem'] as const;
 const BOOKING_TIMES = ['10:30 AM', '11:30 AM', '02:30 PM', '04:00 PM', '05:30 PM', '07:00 PM'] as const;
@@ -306,4 +308,81 @@ publicRouter.get('/chat/:id', (req, res) => {
     throw new HttpError(404, 'কথোপকথন পাওয়া যায়নি');
   }
   res.json({ messages: messagesAfter(id, Number(req.query.after) || 0) });
+});
+
+// ---------- instant demo store creation (metapos-tenant) ----------
+
+publicRouter.get('/tenants/check', async (req, res) => {
+  const subdomain = String(req.query.subdomain || '');
+  const result = await isSubdomainAvailable(subdomain);
+  res.json(result);
+});
+
+publicRouter.post(['/tenants/create', '/demo/create-store'], createStoreLimit, async (req, res) => {
+  const b = req.body;
+  const subdomain = reqStr(b, 'subdomain', { max: 30, label: 'সাবডোমেন' }).toLowerCase().trim();
+  const shopName = reqStr(b, 'shopName', { max: 100, label: 'দোকান বা প্রকাশনীর নাম' });
+  const ownerEmail = email(b, 'ownerEmail') || email(b, 'email');
+  if (!ownerEmail) {
+    throw new HttpError(400, 'সঠিক ইমেইল ঠিকানা প্রদান করুন');
+  }
+  const ownerName = str(b, 'ownerName', { max: 100 }) || str(b, 'name', { max: 100 }) || shopName;
+  const ownerPhone = phone(b, 'phone');
+
+  const check = await isSubdomainAvailable(subdomain);
+  if (!check.available) {
+    throw new HttpError(400, check.reason || 'সাবডোমেনটি গ্রহণযোগ্য নয় বা ইতিমধ্যে ব্যবহৃত হয়েছে।');
+  }
+
+  const creds = await createTenantStore({
+    subdomain,
+    shopName,
+    ownerEmail,
+    ownerName,
+    phone: ownerPhone ?? undefined,
+  });
+
+  const t = now();
+  // Record in demo_stores table
+  db.prepare(
+    `INSERT INTO demo_stores (subdomain, shop_name, owner_name, owner_email, owner_phone, store_url, status, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?)`,
+  ).run(subdomain, shopName, ownerName, ownerEmail, ownerPhone ?? null, creds.url, t, t);
+
+  // Also record in leads table for admin visibility
+  db.prepare(
+    `INSERT INTO leads (name, phone, email, press_name, press_type, plan, notes, created_at, updated_at)
+     VALUES (?, ?, ?, ?, 'তাত্ক্ষণিক ডেমো স্টোর', 'Trial (7 Days)', ?, ?, ?)`,
+  ).run(
+    ownerName,
+    ownerPhone,
+    ownerEmail,
+    shopName,
+    `লাইভ ডেমো স্টোর তৈরি করা হয়েছে: ${creds.url} | সাবডোমেন: ${subdomain}`,
+    t,
+    t,
+  );
+
+  // Send Email with credentials to requester, CCing business@, coo@, sales@
+  sendDemoStoreCreatedEmail({
+    shopName,
+    subdomain,
+    storeUrl: creds.url,
+    ownerName,
+    ownerEmail,
+    ownerPassword: creds.ownerPassword,
+    adminLogin: creds.adminLogin,
+    adminPassword: creds.adminPassword,
+    phone: ownerPhone ?? undefined,
+    ip: (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || 'Unknown',
+  }).catch((err) => console.error('[Demo Store Email Error]:', err));
+
+  res.status(201).json({
+    success: true,
+    url: creds.url,
+    shop: creds.shop,
+    ownerLogin: creds.ownerLogin,
+    ownerPassword: creds.ownerPassword,
+    created: creds.created,
+  });
 });

@@ -94,11 +94,26 @@ db.exec(`
     updated_at    TEXT NOT NULL
   );
 
-  CREATE INDEX IF NOT EXISTS idx_leads_created    ON leads(created_at);
-  CREATE INDEX IF NOT EXISTS idx_bookings_slot    ON bookings(booking_date, booking_time);
-  CREATE INDEX IF NOT EXISTS idx_bookings_created ON bookings(created_at);
-  CREATE INDEX IF NOT EXISTS idx_chat_msg_conv    ON chat_messages(conversation_id, id);
-  CREATE INDEX IF NOT EXISTS idx_sessions_user    ON sessions(user_id);
+  CREATE TABLE IF NOT EXISTS demo_stores (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    subdomain      TEXT UNIQUE NOT NULL,
+    shop_name      TEXT NOT NULL,
+    owner_name     TEXT,
+    owner_email    TEXT NOT NULL,
+    owner_phone    TEXT,
+    store_url      TEXT NOT NULL,
+    status         TEXT NOT NULL DEFAULT 'active',
+    created_at     TEXT NOT NULL,
+    updated_at     TEXT NOT NULL
+  );
+
+  CREATE INDEX IF NOT EXISTS idx_leads_created        ON leads(created_at);
+  CREATE INDEX IF NOT EXISTS idx_bookings_slot        ON bookings(booking_date, booking_time);
+  CREATE INDEX IF NOT EXISTS idx_bookings_created     ON bookings(created_at);
+  CREATE INDEX IF NOT EXISTS idx_chat_msg_conv        ON chat_messages(conversation_id, id);
+  CREATE INDEX IF NOT EXISTS idx_sessions_user        ON sessions(user_id);
+  CREATE INDEX IF NOT EXISTS idx_demo_stores_sub      ON demo_stores(subdomain);
+  CREATE INDEX IF NOT EXISTS idx_demo_stores_created  ON demo_stores(created_at);
 `);
 
 // Migration: rows created by `npm run seed` are flagged so `npm run seed:clear`

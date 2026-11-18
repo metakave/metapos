@@ -13,6 +13,7 @@ import {
   Download,
   Package,
   History,
+  Zap,
 } from 'lucide-react';
 import { TRUSTED_PUBLISHERS } from '../data/publisherData';
 
@@ -177,9 +178,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={onOpenDemo}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#064E3B] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[#064E3B]/25 transition-all hover:bg-[#043E2F] hover:shadow-xl active:scale-95 border border-[#064E3B]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#064E3B] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[#064E3B]/25 transition-all hover:bg-[#043E2F] hover:shadow-xl active:scale-95 border border-[#064E3B] cursor-pointer"
             >
-              <span>ফ্রি ডেমো বুক করুন (Schedule Demo)</span>
+              <Zap className="h-4 w-4 text-[#FDE68A]" />
+              <span>ফ্রি ডেমো স্টোর তৈরি করুন (Instant Demo)</span>
               <ArrowRight className="h-4 w-4 text-[#FDE68A]" />
             </button>
             <a

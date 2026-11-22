@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
         {/* Brand Logo */}
         <Link to="/" className="flex items-center group py-1" aria-label="MetaPOS Home">
           <img
-            src="/logo.png"
+            src="/logo.png?v=2"
             alt="MetaPOS"
             className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
           />

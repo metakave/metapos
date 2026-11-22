@@ -49,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
           <div className="md:col-span-4 space-y-4">
             <Link to="/" className="inline-flex items-center group" aria-label="MetaPOS Home">
               <img
-                src="/logo.png"
+                src="/logo.png?v=2"
                 alt="MetaPOS"
                 className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
               />

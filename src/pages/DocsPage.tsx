@@ -26,20 +26,20 @@ const NAV: { id: SectionId; label: string; icon: React.ComponentType<{ className
 ];
 
 const Section: React.FC<{ n: string; title: string; intro: string; children: React.ReactNode }> = ({ n, title, intro, children }) => (
-  <div className="space-y-5">
+  <div className="space-y-6">
     <div className="border-b border-[#0B192C]/10 pb-4">
-      <span className="text-xs font-bold text-[#00875A] uppercase">অধ্যায় {n}</span>
-      <h2 className="text-2xl font-bold text-[#0B192C] mt-1">{title}</h2>
+      <span className="text-xs sm:text-sm font-bold text-[#00875A] uppercase tracking-wider">অধ্যায় {n}</span>
+      <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B192C] mt-1">{title}</h2>
     </div>
-    <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">{intro}</p>
+    <p className="text-base sm:text-lg text-[#0B192C]/85 leading-relaxed font-medium">{intro}</p>
     {children}
   </div>
 );
 
 const Steps: React.FC<{ title?: string; items: React.ReactNode[] }> = ({ title = 'ধাপসমূহ:', items }) => (
-  <div className="rounded-xl bg-[#FAF9F5] p-4 border border-[#0B192C]/10 space-y-3">
-    <h4 className="text-xs font-bold text-[#0B192C] uppercase tracking-wide">{title}</h4>
-    <ol className="list-decimal list-inside space-y-2 text-xs text-[#0B192C] font-semibold">
+  <div className="rounded-2xl bg-[#FAF9F5] p-5 sm:p-6 border border-[#0B192C]/10 space-y-3.5">
+    <h4 className="text-xs sm:text-sm font-bold text-[#0B192C] uppercase tracking-wider">{title}</h4>
+    <ol className="list-decimal list-inside space-y-2.5 text-sm sm:text-base text-[#0B192C] font-medium leading-relaxed">
       {items.map((it, i) => (
         <li key={i}>{it}</li>
       ))}
@@ -48,11 +48,11 @@ const Steps: React.FC<{ title?: string; items: React.ReactNode[] }> = ({ title =
 );
 
 const Tiles: React.FC<{ items: [string, string][] }> = ({ items }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
     {items.map(([h, p]) => (
-      <div key={h} className="rounded-xl border border-[#0B192C]/10 p-4 bg-[#FAF9F5] space-y-2">
-        <h4 className="font-bold text-[#0B192C]">{h}</h4>
-        <p className="text-[#0B192C]/70 font-medium">{p}</p>
+      <div key={h} className="rounded-2xl border border-[#0B192C]/10 p-5 bg-[#FAF9F5] space-y-2">
+        <h4 className="font-bold text-[#0B192C] text-sm sm:text-base">{h}</h4>
+        <p className="text-[#0B192C]/75 font-medium text-xs sm:text-sm leading-relaxed">{p}</p>
       </div>
     ))}
   </div>
@@ -76,7 +76,7 @@ export const DocsPage: React.FC = () => {
             ব্যবহার নির্দেশিকা
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#0B192C]">MetaPOS ব্যবহার নির্দেশিকা</h1>
-          <p className="mt-2 text-sm sm:text-base text-[#0B192C]/80 font-medium">
+          <p className="mt-3 text-base sm:text-lg text-[#0B192C]/80 font-medium leading-relaxed">
             কাউন্টার সেটআপ, বই ক্যাটালগ, বিক্রি, সেশন বন্ধ, স্টক ও রিপোর্ট — ধাপে ধাপে।
           </p>
         </div>
@@ -92,7 +92,7 @@ export const DocsPage: React.FC = () => {
                   key={item.id}
                   onClick={() => setActive(item.id)}
                   aria-current={isSelected ? 'page' : undefined}
-                  className={`w-full flex items-center justify-between p-3 rounded-xl text-xs font-bold transition-all text-left ${
+                  className={`w-full flex items-center justify-between p-3 rounded-xl text-xs sm:text-sm font-bold transition-all text-left ${
                     isSelected ? 'bg-[#00D492] text-[#0B192C] shadow-xs' : 'text-[#0B192C] hover:bg-[#FAF9F5]'
                   }`}
                 >
@@ -106,15 +106,15 @@ export const DocsPage: React.FC = () => {
             })}
 
             <div className="pt-4 border-t border-[#0B192C]/10 mt-3 px-3">
-              <p className="text-[11px] text-[#0B192C]/70 font-semibold">সরাসরি সহায়তার প্রয়োজন?</p>
+              <p className="text-xs text-[#0B192C]/70 font-semibold">সরাসরি সহায়তার প্রয়োজন?</p>
               <a
                 href="https://wa.me"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-bold text-[#00875A] hover:underline"
+                className="mt-1.5 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#00875A] hover:underline"
               >
                 <span>হোয়াটসঅ্যাপে টেকনিক্যাল সাপোর্ট নিন</span>
-                <ExternalLink className="h-3 w-3" />
+                <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </div>
           </nav>
@@ -157,15 +157,15 @@ export const DocsPage: React.FC = () => {
                     <>অনেক বই একসাথে তুলতে বইয়ের তালিকা থেকে এক্সেল/CSV ইমপোর্ট ব্যবহার করুন।</>,
                   ]}
                 />
-                <div className="rounded-xl bg-[#0B192C] text-white p-4 font-mono text-xs space-y-2">
+                <div className="rounded-xl bg-[#0B192C] text-white p-4 sm:p-5 font-mono text-xs sm:text-sm space-y-2.5">
                   <div className="flex justify-between items-center text-slate-400 border-b border-slate-700 pb-2">
-                    <span>নমুনা: একই বই, দুই রকম ISBN</span>
-                    <button onClick={() => copy('9780140449136')} className="flex items-center gap-1 text-[11px] text-emerald-400 hover:text-white">
-                      {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    <span className="font-sans font-semibold">নমুনা: একই বই, দুই রকম ISBN</span>
+                    <button onClick={() => copy('9780140449136')} className="flex items-center gap-1.5 text-xs text-emerald-400 hover:text-white font-sans font-semibold">
+                      {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                       <span>{copied ? 'কপি হয়েছে' : 'ISBN-13 কপি করুন'}</span>
                     </button>
                   </div>
-                  <pre className="text-slate-300 text-[11px] leading-relaxed whitespace-pre-wrap">
+                  <pre className="text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">
 {`লিখেছেন:   0-14-044913-2      (ISBN-10)
 সংরক্ষিত:  9780140449136      (ISBN-13 = বারকোড)
 দেখায়:     ISBN-10 0140449132`}
@@ -199,7 +199,7 @@ export const DocsPage: React.FC = () => {
                     <>বই ফেরত এলে আগের অর্ডার খুঁজে রিফান্ড করুন — স্টকে কপি আবার যোগ হয়।</>,
                   ]}
                 />
-                <div className="rounded-xl border-2 border-[#D97706]/30 bg-[#FFFBEB] p-4 text-xs text-[#78350F] font-semibold">
+                <div className="rounded-xl border-2 border-[#D97706]/30 bg-[#FFFBEB] p-4 sm:p-5 text-xs sm:text-sm text-[#78350F] font-semibold leading-relaxed">
                   বিকাশ বা নগদে টাকা নিতে চাইলে সেটিংসে ওই নামে আলাদা পেমেন্ট পদ্ধতি যোগ করুন। গ্রাহক নিজের ফোন থেকে টাকা পাঠানোর পর ক্যাশিয়ার
                   সেই পদ্ধতি বেছে নেন — বিকাশ/নগদের সাথে স্বয়ংক্রিয় সংযোগ নেই, তবে রিপোর্টে পদ্ধতিভিত্তিক হিসাব আলাদা দেখা যায়।
                 </div>

@@ -47,20 +47,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#0B192C]/10">
           {/* Brand Info */}
           <div className="md:col-span-4 space-y-4">
-            <Link to="/" className="flex items-center gap-2.5">
+            <Link to="/" className="inline-flex flex-col group" aria-label="MetaPOS Home">
               <img
-                src="/favicon.png"
-                alt="MetaPOS Logo"
-                className="h-8 w-8 rounded-lg shadow-xs"
+                src="/logo.png"
+                alt="MetaPOS"
+                className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
               />
-              <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-tight text-[#0B192C]">
-                  Meta<span className="text-[#00D492] font-extrabold">POS</span>
-                </span>
-                <span className="text-[10px] font-semibold tracking-wide text-[#831843] -mt-1">
-                  মাল্টি সেলস সল্যুশন
-                </span>
-              </div>
+              <span className="text-[10px] font-semibold tracking-wide text-[#831843] pl-1 mt-0.5">
+                মাল্টি সেলস সল্যুশন
+              </span>
             </Link>
             <p className="text-xs text-[#0B192C]/75 leading-relaxed max-w-sm font-medium">
               বইমেলা ও বইয়ের দোকানের বাংলা পিওএস — ISBN স্ক্যান করে বিক্রি, বই ক্যাটালগ, বাকি কপির হিসাব ও বিক্রির ড্যাশবোর্ড এক প্ল্যাটফর্মে।

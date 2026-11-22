@@ -38,15 +38,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
     >
       <div className="mx-auto flex h-[76px] w-full max-w-[1280px] items-center justify-between px-5 sm:px-8">
         {/* Brand Logo */}
-        <Link to="/" className="flex flex-col justify-center group py-1" aria-label="MetaPOS Home">
+        <Link to="/" className="flex items-center group py-1" aria-label="MetaPOS Home">
           <img
             src="/logo.png"
             alt="MetaPOS"
             className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
           />
-          <span className="text-[9px] sm:text-[10px] font-semibold tracking-wide text-[#831843] pl-1 -mt-0.5">
-            মাল্টি সেলস সল্যুশন
-          </span>
         </Link>
 
         {/* Desktop Navigation */}

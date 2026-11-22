@@ -39,16 +39,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
       <div className="mx-auto flex h-[76px] w-full max-w-[1280px] items-center justify-between px-5 sm:px-8">
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-[#0B192C] text-white shadow-md shadow-[#0B192C]/15 transition-transform group-hover:scale-105 border border-[#0B192C]/80">
-            <BookOpen className="h-5 w-5 text-emerald-400" />
-            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D97706]"></span>
-            </span>
-          </div>
+          <img
+            src="/favicon.png"
+            alt="MetaPOS Logo"
+            className="h-9 w-9 rounded-xl shadow-sm transition-transform group-hover:scale-105"
+          />
           <div className="flex flex-col">
             <span className="text-xl font-bold tracking-tight text-[#0B192C]">
-              Meta<span className="text-[#064E3B] font-extrabold">POS</span>
+              Meta<span className="text-[#00D492] font-extrabold">POS</span>
             </span>
             <span className="text-[10px] font-semibold tracking-wide text-[#831843] -mt-1">
               মাল্টি সেলস সল্যুশন
@@ -65,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
                 key={link.name}
                 to={link.path}
                 className={`text-[14px] font-bold transition-colors ${
-                  isActive ? 'text-[#064E3B] border-b-2 border-[#064E3B] pb-1' : 'text-[#0B192C]/80 hover:text-[#064E3B]'
+                  isActive ? 'text-[#00875A] border-b-2 border-[#00D492] pb-1' : 'text-[#0B192C]/80 hover:text-[#00875A]'
                 }`}
               >
                 {link.name}
@@ -78,16 +76,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={onOpenSignIn}
-            className="text-[14px] font-bold text-[#0B192C] hover:text-[#064E3B] px-3 py-2 transition-colors"
+            className="text-[14px] font-bold text-[#0B192C] hover:text-[#00875A] px-3 py-2 transition-colors cursor-pointer"
           >
             লগইন (Sign In)
           </button>
           <button
             onClick={onOpenDemo}
-            className="group relative inline-flex items-center gap-2 rounded-full bg-[#064E3B] px-5 py-2.5 text-[14px] font-bold text-white shadow-md shadow-[#064E3B]/20 transition-all hover:bg-[#043E2F] hover:shadow-lg active:scale-95 border border-[#064E3B]"
+            className="group relative inline-flex items-center gap-2 rounded-full bg-[#00D492] px-5 py-2.5 text-[14px] font-extrabold text-[#0B192C] shadow-md shadow-[#00D492]/25 transition-all hover:bg-[#00B87D] hover:shadow-lg active:scale-95 border border-[#00D492] cursor-pointer"
           >
             <span>ফ্রি ডেমো স্টোর</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 text-amber-300" />
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 text-[#0B192C]" />
           </button>
         </div>
 
@@ -131,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
                   setMobileMenuOpen(false);
                   onOpenDemo();
                 }}
-                className="w-full text-center py-2.5 text-sm font-bold text-white bg-[#064E3B] rounded-lg shadow-sm"
+                className="w-full text-center py-2.5 text-sm font-extrabold text-[#0B192C] bg-[#00D492] hover:bg-[#00B87D] rounded-xl shadow-xs cursor-pointer"
               >
                 ফ্রি ডেমো স্টোর
               </button>

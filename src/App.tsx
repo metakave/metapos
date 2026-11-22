@@ -43,7 +43,7 @@ function Site() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FBFBFA] flex flex-col text-[#0B192C] selection:bg-[#064E3B] selection:text-white">
+    <div className="min-h-screen bg-[#FBFBFA] flex flex-col text-[#0B192C] selection:bg-[#00D492] selection:text-[#0B192C]">
       {/* Navigation Bar */}
       <Navbar onOpenDemo={() => handleOpenDemo()} onOpenSignIn={() => setSignInOpen(true)} />
 

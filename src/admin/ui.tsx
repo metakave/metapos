@@ -59,7 +59,7 @@ export const BOOKING_KIND: Record<string, string> = {
 const TONES: Record<Tone, string> = {
   blue: 'bg-[#EAF2FC] text-[#1C5CAB] ring-[#2A78D6]/25',
   amber: 'bg-[#FEF3C7] text-[#92400E] ring-[#D97706]/30',
-  green: 'bg-[#ECFDF5] text-[#064E3B] ring-[#064E3B]/25',
+  green: 'bg-[#E6FBF4] text-[#00875A] ring-[#00D492]/30',
   gray: 'bg-[#F1F3F5] text-[#52514E] ring-[#0B192C]/15',
   red: 'bg-[#FDF2F8] text-[#831843] ring-[#831843]/25',
   violet: 'bg-[#F0EEFC] text-[#4A3AA7] ring-[#6250D6]/25',
@@ -183,7 +183,7 @@ export const Empty: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
 export const btn = {
   primary:
-    'inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#064E3B] px-4 py-2 text-xs font-bold text-white hover:bg-[#043E2F] disabled:opacity-60',
+    'inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#00D492] px-4 py-2 text-xs font-bold text-[#0B192C] hover:bg-[#00B87D] disabled:opacity-60 shadow-xs',
   secondary:
     'inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#0B192C]/20 bg-white px-4 py-2 text-xs font-bold text-[#0B192C] hover:bg-[#FAF9F5] disabled:opacity-60',
   danger:
@@ -191,7 +191,7 @@ export const btn = {
 };
 
 export const inputCls =
-  'w-full rounded-lg border border-[#0B192C]/20 bg-white px-3 py-2 text-xs font-medium focus:border-[#064E3B] focus:outline-none';
+  'w-full rounded-lg border border-[#0B192C]/20 bg-white px-3 py-2 text-xs font-medium focus:border-[#00D492] focus:outline-none';
 
 export const Field: React.FC<{ label: string; children: React.ReactNode; hint?: string }> = ({ label, children, hint }) => (
   <label className="block">

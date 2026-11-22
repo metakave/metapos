@@ -5,9 +5,13 @@
     --color-navy: #0B192C;
     --color-navy-dark: #070F1A;
     --color-navy-light: #1E293B;
-    --color-emerald: #064E3B;
-    --color-emerald-light: #046A38;
-    --color-emerald-accent: #10B981;
+    --color-brand-green: #00D492;
+    --color-brand-green-hover: #00B87D;
+    --color-brand-green-dark: #00875A;
+    --color-brand-green-light: #E6FBF4;
+    --color-emerald: #00D492;
+    --color-emerald-light: #00B87D;
+    --color-emerald-accent: #00D492;
     --color-amber: #B45309;
     --color-amber-light: #F59E0B;
     --color-burgundy: #831843;
@@ -61,4 +65,40 @@
   background-image: 
     linear-gradient(to right, rgba(11, 25, 44, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(11, 25, 44, 0.03) 1px, transparent 1px);
+}
+
+/* MetaPOS Brand Green Utilities (#00D492) */
+.bg-brand {
+  background-color: #00D492;
+}
+.bg-brand-hover:hover {
+  background-color: #00B87D;
+}
+.text-brand {
+  color: #00D492;
+}
+.text-brand-dark {
+  color: #00875A;
+}
+.border-brand {
+  border-color: #00D492;
+}
+.border-brand-subtle {
+  border-color: rgba(0, 212, 146, 0.35);
+}
+.badge-brand {
+  background-color: #E6FBF4;
+  color: #00875A;
+  border: 1px solid rgba(0, 212, 146, 0.35);
+}
+.btn-brand-primary {
+  background-color: #00D492;
+  color: #0B192C;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(0, 212, 146, 0.28);
+  transition: all 0.15s ease-in-out;
+}
+.btn-brand-primary:hover {
+  background-color: #00B87D;
+  box-shadow: 0 6px 20px rgba(0, 212, 146, 0.38);
 }

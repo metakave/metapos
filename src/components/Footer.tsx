@@ -29,9 +29,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <button
                 onClick={onOpenDemo}
-                className="rounded-full bg-white px-7 py-3.5 text-xs sm:text-sm font-bold text-[#0B192C] shadow-md hover:bg-slate-100 transition-all active:scale-95"
+                className="rounded-full bg-[#00D492] hover:bg-[#00B87D] px-7 py-3.5 text-xs sm:text-sm font-extrabold text-[#0B192C] shadow-md transition-all active:scale-95 cursor-pointer"
               >
-                ফ্রি ডেমো সেশন বুক করুন
+                ফ্রি ডেমো স্টোর শুরু করুন (Instant Demo)
               </button>
               <Link
                 to="/pricing"
@@ -48,12 +48,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
           {/* Brand Info */}
           <div className="md:col-span-4 space-y-4">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0B192C] text-white shadow-xs">
-                <BookOpen className="h-4 w-4 text-emerald-400" />
-              </div>
+              <img
+                src="/favicon.png"
+                alt="MetaPOS Logo"
+                className="h-8 w-8 rounded-lg shadow-xs"
+              />
               <div className="flex flex-col">
                 <span className="text-xl font-bold tracking-tight text-[#0B192C]">
-                  Meta<span className="text-[#064E3B] font-extrabold">POS</span>
+                  Meta<span className="text-[#00D492] font-extrabold">POS</span>
                 </span>
                 <span className="text-[10px] font-semibold tracking-wide text-[#831843] -mt-1">
                   মাল্টি সেলস সল্যুশন
@@ -65,11 +67,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo, onOpenSignIn }) => {
             </p>
             <div className="pt-2 text-xs text-[#0B192C]/70 space-y-1">
               <p className="flex items-center gap-1.5 font-bold text-[#0B192C]">
-                <MapPin className="h-3.5 w-3.5 text-[#064E3B]" />
+                <MapPin className="h-3.5 w-3.5 text-[#00875A]" />
                 <span>বাংলাবাজার ও কাওরান বাজার, ঢাকা, বাংলাদেশ</span>
               </p>
               <p className="flex items-center gap-1.5 font-bold text-[#0B192C]">
-                <Phone className="h-3.5 w-3.5 text-[#064E3B]" />
+                <Phone className="h-3.5 w-3.5 text-[#00875A]" />
                 <span>+৮৮০ ১৭০০-০০০০০০ (সরাসরি বাংলা হেল্পলাইন)</span>
               </p>
             </div>

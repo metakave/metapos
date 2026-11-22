@@ -17,12 +17,12 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#064E3B]/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#064E3B] mb-4">
+          <span className="inline-block rounded-full bg-[#E6FBF4] border border-[#00D492]/40 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#00875A] mb-4">
             মূল্যতালিকা (Pricing in BDT)
           </span>
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0B192C] leading-[1.18]">
             সঠিক প্ল্যান বেছে নিন। বাড়ুন <br className="hidden sm:inline" />
-            <span className="font-serif italic font-normal text-[#064E3B]">সীমাহীনভাবে।</span>
+            <span className="font-serif italic font-normal text-[#00875A]">সীমাহীনভাবে।</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#0B192C]/80">
             প্রতিটি প্ল্যানে রয়েছে ৭ দিনের ফ্রি ট্রায়াল, কাউন্টার বিলিং, বিস্তারিত ক্যাটালগ ও বিক্রয় বিশ্লেষণ — এবং বাৎসরিক পেমেন্টে ১৫% বিশেষ ছাড়।
@@ -40,8 +40,8 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
             </button>
             <button
               onClick={() => setIsAnnual(true)}
-              className={`flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-bold transition-all ${
-                isAnnual ? 'bg-[#064E3B] text-white shadow-xs' : 'text-[#0B192C]/70 hover:text-[#0B192C]'
+              className={`flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                isAnnual ? 'bg-[#00D492] text-[#0B192C] shadow-xs' : 'text-[#0B192C]/70 hover:text-[#0B192C]'
               }`}
             >
               <span>বাৎসরিক বিলিং (Yearly)</span>
@@ -63,14 +63,14 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
                 key={plan.id}
                 className={`relative flex flex-col justify-between rounded-2xl border-2 p-5 transition-all ${
                   plan.popular
-                    ? 'border-[#064E3B] bg-[#FAF9F5] shadow-xl ring-2 ring-[#064E3B]/30 lg:-translate-y-2'
+                    ? 'border-[#00D492] bg-[#FAF9F5] shadow-xl ring-2 ring-[#00D492]/30 lg:-translate-y-2'
                     : 'border-[#0B192C]/10 bg-white hover:border-[#0B192C]/30 hover:shadow-md'
                 }`}
               >
-                {/* Popular Badge: Deep Emerald & Warm Amber Star */}
+                {/* Popular Badge */}
                 {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[#064E3B] px-4 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-md flex items-center gap-1.5 border border-white/20">
-                    <Sparkles className="h-3 w-3 text-amber-300" />
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[#00D492] px-4 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#0B192C] shadow-md flex items-center gap-1.5 border border-[#00D492]/30">
+                    <Sparkles className="h-3 w-3 text-amber-700" />
                     <span>{plan.badge || 'সবচেয়ে জনপ্রিয়'}</span>
                   </div>
                 )}
@@ -118,7 +118,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
                   <div className="mt-5 space-y-2.5">
                     {plan.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start gap-2 text-xs text-[#0B192C]">
-                        <Check className="h-4 w-4 text-[#064E3B] shrink-0 mt-0.5 stroke-[2.5]" />
+                        <Check className="h-4 w-4 text-[#00875A] shrink-0 mt-0.5 stroke-[2.5]" />
                         <span className="leading-snug font-medium">{feature}</span>
                       </div>
                     ))}
@@ -128,16 +128,16 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
                 {/* Card CTA Button */}
                 <div className="mt-8 pt-4 border-t border-[#0B192C]/10">
                   <div className="mb-2.5 text-center">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#064E3B] bg-[#ECFDF5] border border-[#064E3B]/20 rounded-full px-3 py-0.5">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#00875A] bg-[#E6FBF4] border border-[#00D492]/30 rounded-full px-3 py-0.5">
                       <Sparkles className="h-3 w-3 text-[#D97706]" />
                       <span>{plan.trial || '7 Days Free Trial'}</span>
                     </span>
                   </div>
                   <button
                     onClick={() => onOpenDemo(plan.name)}
-                    className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
+                    className={`w-full py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
                       plan.popular
-                        ? 'bg-[#064E3B] text-white hover:bg-[#043E2F] shadow-md border border-[#064E3B]'
+                        ? 'bg-[#00D492] text-[#0B192C] hover:bg-[#00B87D] shadow-md border border-[#00D492]'
                         : 'border-2 border-[#0B192C]/20 bg-white text-[#0B192C] hover:bg-[#F4F4F0] hover:border-[#0B192C]/40'
                     }`}
                   >
@@ -153,7 +153,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenDemo, onOpenComparison }
         <div className="mt-12 text-center">
           <button
             onClick={onOpenComparison}
-            className="inline-flex items-center gap-2 text-sm font-bold text-[#064E3B] hover:text-[#043E2F] hover:underline"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#00875A] hover:text-[#00B87D] hover:underline cursor-pointer"
           >
             <span>সব ফিচার ও প্যাকেজ তুলনা দেখুন (Compare all features in BDT)</span>
             <ArrowRight className="h-4 w-4 text-[#D97706]" />

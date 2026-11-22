@@ -119,14 +119,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
           {/* LEFT COLUMN: Header, 5 Action Buttons, and Embedded Booking Widget (col-span-12 md:col-span-7) */}
           <div className="col-span-12 md:col-span-7">
             {/* Tag Badge */}
-            <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#064E3B]/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#064E3B] mb-4">
+            <span className="inline-block rounded-full bg-[#E6FBF4] border border-[#00D492]/40 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#00875A] mb-4">
               যোগাযোগ ও সহায়তা (Get Help)
             </span>
 
             {/* H1 matching Foodops */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B192C] leading-[1.08] tracking-tight">
               যেভাবেই যোগাযোগ করুন না কেন, <br />
-              <span className="font-serif italic font-normal text-[#064E3B]">আমরা সর্বদা</span> আপনার পাশে।
+              <span className="font-serif italic font-normal text-[#00875A]">আমরা সর্বদা</span> আপনার পাশে।
             </h1>
 
             {/* Subtitle matching Foodops */}
@@ -139,9 +139,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
               {/* 1. Call Us */}
               <a
                 href="tel:+8801700000000"
-                className="text-left border-2 border-[#0B192C]/10 bg-white p-5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[#064E3B] hover:shadow-md active:scale-[0.99] group"
+                className="text-left border-2 border-[#0B192C]/10 bg-white p-5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00D492] hover:shadow-md active:scale-[0.99] group"
               >
-                <div className="h-9 w-9 rounded-lg bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mb-3 group-hover:bg-[#064E3B] group-hover:text-white transition-colors">
+                <div className="h-9 w-9 rounded-lg bg-[#E6FBF4] text-[#00875A] flex items-center justify-center mb-3 group-hover:bg-[#00D492] group-hover:text-[#0B192C] transition-colors">
                   <Phone className="w-4 h-4" />
                 </div>
                 <p className="font-bold text-sm text-[#0B192C]">সরাসরি কল করুন (Call us)</p>
@@ -153,9 +153,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
               {/* 2. Chat Now */}
               <button
                 onClick={onOpenChat}
-                className="text-left border-2 border-[#0B192C]/10 bg-white p-5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[#064E3B] hover:shadow-md active:scale-[0.99] group"
+                className="text-left border-2 border-[#0B192C]/10 bg-white p-5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00D492] hover:shadow-md active:scale-[0.99] group"
               >
-                <div className="h-9 w-9 rounded-lg bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mb-3 group-hover:bg-[#064E3B] group-hover:text-white transition-colors">
+                <div className="h-9 w-9 rounded-lg bg-[#E6FBF4] text-[#00875A] flex items-center justify-center mb-3 group-hover:bg-[#00D492] group-hover:text-[#0B192C] transition-colors">
                   <MessageCircle className="w-4 h-4" />
                 </div>
                 <p className="font-bold text-sm text-[#0B192C]">চ্যাট করুন (Chat now)</p>
@@ -192,10 +192,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className={`text-left border-2 p-5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] group ${
-                  activeFormTab === 'meeting' ? 'border-[#064E3B] bg-[#FAF9F5]' : 'border-[#0B192C]/10 bg-white hover:border-[#064E3B]'
+                  activeFormTab === 'meeting' ? 'border-[#0B192C] bg-[#FAF9F5]' : 'border-[#0B192C]/10 bg-white hover:border-[#00D492]'
                 }`}
               >
-                <div className="h-9 w-9 rounded-lg bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mb-3 group-hover:bg-[#064E3B] group-hover:text-white transition-colors">
+                <div className="h-9 w-9 rounded-lg bg-[#E6FBF4] text-[#00875A] flex items-center justify-center mb-3 group-hover:bg-[#00D492] group-hover:text-[#0B192C] transition-colors">
                   <CalendarClock className="w-4 h-4" />
                 </div>
                 <p className="font-bold text-sm text-[#0B192C]">বৈঠকের অনুরোধ (Request a meeting)</p>
@@ -212,12 +212,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className={`text-left border-2 p-5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99] group sm:col-span-2 ${
-                  activeFormTab === 'demo' ? 'border-[#064E3B] bg-[#ECFDF5]/50 ring-1 ring-[#064E3B]' : 'border-[#0B192C]/10 bg-white hover:border-[#064E3B]'
+                  activeFormTab === 'demo' ? 'border-[#00D492] bg-[#E6FBF4]/50 ring-1 ring-[#00D492]' : 'border-[#0B192C]/10 bg-white hover:border-[#00D492]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-lg bg-[#064E3B] text-white flex items-center justify-center shrink-0">
-                    <Presentation className="w-4 h-4 text-amber-300" />
+                  <div className="h-9 w-9 rounded-lg bg-[#00D492] text-[#0B192C] flex items-center justify-center shrink-0">
+                    <Presentation className="w-4 h-4 text-[#0B192C]" />
                   </div>
                   <div>
                     <p className="font-bold text-sm text-[#0B192C]">ফ্রি ডেমো বুক করুন (Schedule a demo)</p>
@@ -236,7 +236,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                 <button
                   type="button"
                   onClick={onOpenChat}
-                  className="underline font-bold text-[#064E3B] hover:text-[#043E2F]"
+                  className="underline font-bold text-[#00875A] hover:text-[#00B87D]"
                 >
                   চ্যাট ওপেন করুন
                 </button>{' '}
@@ -249,7 +249,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                   onClick={() => { setActiveFormTab('demo'); setSubmitted(false); }}
                   className={`px-5 py-2 text-xs sm:text-sm font-bold rounded-full border transition-all ${
                     activeFormTab === 'demo'
-                      ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-xs'
+                      ? 'bg-[#00D492] text-[#0B192C] border-[#00D492] shadow-xs'
                       : 'border-[#0B192C]/15 bg-white text-[#0B192C] hover:bg-[#FAF9F5]'
                   }`}
                 >
@@ -281,19 +281,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
               <div className="rounded-2xl border-2 border-[#0B192C]/10 bg-white p-6 shadow-sm">
                 {submitted ? (
                   <div className="py-10 text-center space-y-4">
-                    <div className="mx-auto h-16 w-16 rounded-full bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center">
-                      <CheckCircle className="h-10 w-10" />
+                    <div className="mx-auto h-16 w-16 rounded-full bg-[#E6FBF4] text-[#00875A] flex items-center justify-center">
+                      <CheckCircle className="h-10 w-10 text-[#00D492]" />
                     </div>
                     <h3 className="text-2xl font-bold text-[#0B192C]">
                       {activeFormTab === 'demo' ? 'ডেমো সময় সংরক্ষিত হয়েছে!' : activeFormTab === 'meeting' ? 'মিটিং অনুরোধ গৃহীত হয়েছে!' : 'সাপোর্ট টিকিট তৈরি হয়েছে!'}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#0B192C]/80 max-w-md mx-auto leading-relaxed font-medium">
-                      ধন্যবাদ, <strong className="text-[#0B192C]">{formData.name || 'প্রকাশক'}</strong>। আপনার প্রকাশনী <strong className="text-[#0B192C]">{formData.pressName || 'প্রতিষ্ঠান'}</strong>-এর জন্য নির্ধারিত সময়: <strong className="text-[#064E3B]">{selectedDate} নভেম্বর, {selectedTime} (বাংলাদেশ সময়)</strong>। আমাদের প্রতিনিধি আপনার মোবাইল <span className="text-[#064E3B] font-bold">{formData.phone}</span>-এ কনফার্মেশন লিংক পাঠাচ্ছেন।
+                      ধন্যবাদ, <strong className="text-[#0B192C]">{formData.name || 'প্রকাশক'}</strong>। আপনার প্রকাশনী <strong className="text-[#0B192C]">{formData.pressName || 'প্রতিষ্ঠান'}</strong>-এর জন্য নির্ধারিত সময়: <strong className="text-[#00875A]">{selectedDate} নভেম্বর, {selectedTime} (বাংলাদেশ সময়)</strong>। আমাদের প্রতিনিধি আপনার মোবাইল <span className="text-[#00875A] font-bold">{formData.phone}</span>-এ কনফার্মেশন লিংক পাঠাচ্ছেন।
                     </p>
                     <div className="pt-2">
                       <button
                         onClick={() => setSubmitted(false)}
-                        className="rounded-full bg-[#064E3B] px-6 py-2.5 text-xs font-bold text-white hover:bg-[#043E2F]"
+                        className="rounded-full bg-[#00D492] px-6 py-2.5 text-xs font-bold text-[#0B192C] hover:bg-[#00B87D] shadow-xs"
                       >
                         নতুন সময়সূচী দেখুন
                       </button>
@@ -305,10 +305,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <label className="text-xs font-bold text-[#0B192C] uppercase tracking-wide flex items-center gap-1.5">
-                          <Calendar className="h-3.5 w-3.5 text-[#064E3B]" />
+                          <Calendar className="h-3.5 w-3.5 text-[#00875A]" />
                           <span>তারিখ নির্বাচন করুন (নভেম্বর ২০২৬)</span>
                         </label>
-                        <span className="text-[11px] font-bold text-[#064E3B]">বাংলাদেশ সময় (GMT+6)</span>
+                        <span className="text-[11px] font-bold text-[#00875A]">বাংলাদেশ সময় (GMT+6)</span>
                       </div>
 
                       {/* Date Pills */}
@@ -322,7 +322,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                               onClick={() => setSelectedDate(item.date)}
                               className={`py-2 px-1 rounded-xl text-center border transition-all ${
                                 isSelected
-                                  ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-xs'
+                                  ? 'bg-[#00D492] text-[#0B192C] border-[#00D492] shadow-xs font-bold'
                                   : 'bg-[#FAF9F5] border-[#0B192C]/10 text-[#0B192C] hover:bg-[#F4F4F0]'
                               }`}
                             >
@@ -337,7 +337,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                     {/* Time Slot Selector */}
                     <div>
                       <label className="text-xs font-bold text-[#0B192C] uppercase tracking-wide flex items-center gap-1.5 mb-2">
-                        <Clock className="h-3.5 w-3.5 text-[#064E3B]" />
+                        <Clock className="h-3.5 w-3.5 text-[#00875A]" />
                         <span>উপযুক্ত সময় নির্বাচন করুন</span>
                       </label>
                       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 text-xs">
@@ -377,7 +377,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                             placeholder="যেমন: মো. রফিকুল ইসলাম"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#00D492] focus:outline-none"
                           />
                         </div>
 
@@ -389,7 +389,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                             placeholder="017xxxxxxxx"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#00D492] focus:outline-none"
                           />
                         </div>
                       </div>
@@ -403,7 +403,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                             placeholder="যেমন: বাতিঘর / নবযুগ প্রকাশনী"
                             value={formData.pressName}
                             onChange={(e) => setFormData({ ...formData, pressName: e.target.value })}
-                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#00D492] focus:outline-none"
                           />
                         </div>
 
@@ -414,7 +414,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                             placeholder="example@press.com"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#00D492] focus:outline-none"
                           />
                         </div>
                       </div>
@@ -425,7 +425,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                           <select
                             value={formData.meetingFormat}
                             onChange={(e) => setFormData({ ...formData, meetingFormat: e.target.value })}
-                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none bg-white font-medium"
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#00D492] focus:outline-none bg-white font-medium"
                           >
                             <option>গুগল মিট অনলাইন (Google Meet)</option>
                             <option>বাংলাবাজার প্রধান অফিসে সরাসরি</option>
@@ -439,7 +439,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                           <select
                             value={formData.catalogSize}
                             onChange={(e) => setFormData({ ...formData, catalogSize: e.target.value })}
-                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none bg-white font-medium"
+                            className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#00D492] focus:outline-none bg-white font-medium"
                           >
                             <option>১ - ৫০টি বই</option>
                             <option>৫০ - ৫০০টি বই</option>
@@ -456,7 +456,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                           placeholder="যেমন: বইমেলার কয়টি কাউন্টার, ক্যাটালগে কত বই, এক্সেল থেকে ইমপোর্ট..."
                           value={formData.notes}
                           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                          className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#064E3B] focus:outline-none"
+                          className="w-full rounded-xl border border-[#0B192C]/20 p-2.5 text-xs focus:border-[#00D492] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -474,11 +474,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 rounded-xl bg-[#064E3B] text-white text-xs font-bold hover:bg-[#043E2F] shadow-md shadow-[#064E3B]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="w-full py-3.5 rounded-xl bg-[#00D492] text-[#0B192C] text-xs font-bold hover:bg-[#00B87D] shadow-md shadow-[#00D492]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
                     >
-                      {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                      <span>{activeFormTab === 'demo' ? 'ডেমো সময় নিশ্চিত করুন' : activeFormTab === 'meeting' ? 'মিটিং কনফার্ম করুন' : 'টিকিট সাবমিট করুন'}</span>
-                      <span className="text-amber-300 font-normal">({selectedDate} নভেম্বর, {selectedTime})</span>
+                      {loading && <Loader2 className="h-4 w-4 animate-spin text-[#0B192C]" />}
+                      <span>{activeFormTab === 'demo' ? 'ডেমো সময় নিশ্চিত করুন' : activeFormTab === 'meeting' ? 'মিটিং কনফারম করুন' : 'টিকিট সাবমিট করুন'}</span>
+                      <span className="text-[#0B192C]/70 font-semibold">({selectedDate} নভেম্বর, {selectedTime})</span>
                     </button>
                   </form>
                 )}
@@ -490,7 +490,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
                     href="https://wa.me"
                     target="_blank"
                     rel="noreferrer"
-                    className="underline text-[#064E3B] font-bold"
+                    className="underline text-[#00875A] font-bold"
                   >
                     সরাসরি হোয়াটসঅ্যাপে কথা বলতে ক্লিক করুন
                   </a>{' '}
@@ -505,13 +505,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
             {/* Visual Touchscreen POS Card on Tablet */}
             <div className="aspect-[4/3] sm:aspect-[3/4] overflow-hidden rounded-2xl bg-[#0B192C] border-2 border-[#0B192C]/10 relative shadow-xl p-6 flex flex-col justify-between text-white">
               {/* Background ambient lighting */}
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#064E3B]/40 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#00D492]/30 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#831843]/30 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between border-b border-slate-700/80 pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="h-6 w-6 rounded bg-[#064E3B] flex items-center justify-center text-xs font-bold">MP</div>
+                    <div className="h-6 w-6 rounded bg-[#00D492] text-[#0B192C] flex items-center justify-center text-xs font-bold">MP</div>
                     <span className="text-xs font-bold">MetaPOS Counter Live</span>
                   </div>
                   <span className="rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 border border-emerald-500/30">
@@ -563,7 +563,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenSignIn, onOpenCh
               <div>
                 <button
                   onClick={onOpenSignIn}
-                  className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#064E3B] hover:text-[#043E2F]"
+                  className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#00875A] hover:text-[#00B87D]"
                 >
                   <span>কাউন্টার পোর্টালে লগইন করুন (Login)</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

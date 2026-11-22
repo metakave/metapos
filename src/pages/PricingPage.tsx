@@ -44,8 +44,8 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#064E3B]/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#064E3B] mb-4">
-            স্বচ্ছ মূল্যতালিকা (Pricing in BDT)
+          <span className="inline-block rounded-full bg-[#E6FBF4] border border-[#00D492]/40 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#00875A] mb-4">
+            স্বচ্ছ মূল্যতালিকা
           </span>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0B192C] leading-tight">
             বাংলাদেশের প্রকাশকদের জন্য সাশ্রয়ী ও উন্মুক্ত প্ল্যান।
@@ -67,11 +67,11 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
             <button
               onClick={() => setIsAnnual(true)}
               className={`flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-bold transition-all ${
-                isAnnual ? 'bg-[#064E3B] text-white shadow-xs' : 'text-[#0B192C]/70 hover:text-[#0B192C]'
+                isAnnual ? 'bg-[#00D492] text-[#0B192C] shadow-xs' : 'text-[#0B192C]/70 hover:text-[#0B192C]'
               }`}
             >
               <span>বাৎসরিক বিলিং (Yearly)</span>
-              <span className="rounded-full bg-[#FEF3C7] text-[#78350F] text-[10px] font-black px-2 py-0.5 border border-[#D97706]/40">
+              <span className="rounded-full bg-[#0B192C] text-[#00D492] text-[10px] font-black px-2 py-0.5">
                 ১৫% ছাড়
               </span>
             </button>
@@ -89,13 +89,13 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                 key={plan.id}
                 className={`relative flex flex-col justify-between rounded-2xl border-2 p-5 transition-all ${
                   plan.popular
-                    ? 'border-[#064E3B] bg-[#FAF9F5] shadow-xl ring-2 ring-[#064E3B]/30 lg:-translate-y-2'
+                    ? 'border-[#00D492] bg-[#FAF9F5] shadow-xl ring-2 ring-[#00D492]/30 lg:-translate-y-2'
                     : 'border-[#0B192C]/10 bg-white hover:border-[#0B192C]/30 hover:shadow-md'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[#064E3B] px-4 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-md flex items-center gap-1.5 border border-white/20">
-                    <Sparkles className="h-3 w-3 text-amber-300" />
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-[#00D492] px-4 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#0B192C] shadow-md flex items-center gap-1.5 border border-[#00D492]">
+                    <Sparkles className="h-3 w-3 text-[#0B192C]" />
                     <span>{plan.badge || 'সবচেয়ে জনপ্রিয়'}</span>
                   </div>
                 )}
@@ -138,7 +138,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                   <div className="mt-5 space-y-2.5">
                     {plan.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start gap-2 text-xs text-[#0B192C]">
-                        <Check className="h-4 w-4 text-[#064E3B] shrink-0 mt-0.5 stroke-[2.5]" />
+                        <Check className="h-4 w-4 text-[#00875A] shrink-0 mt-0.5 stroke-[2.5]" />
                         <span className="leading-snug font-medium">{feature}</span>
                       </div>
                     ))}
@@ -147,8 +147,8 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
 
                 <div className="mt-8 pt-4 border-t border-[#0B192C]/10">
                   <div className="mb-2.5 text-center">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#064E3B] bg-[#ECFDF5] border border-[#064E3B]/20 rounded-full px-3 py-0.5">
-                      <Sparkles className="h-3 w-3 text-[#D97706]" />
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#00875A] bg-[#E6FBF4] border border-[#00D492]/30 rounded-full px-3 py-0.5">
+                      <Sparkles className="h-3 w-3 text-[#00875A]" />
                       <span>{plan.trial || '7 Days Free Trial'}</span>
                     </span>
                   </div>
@@ -156,7 +156,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                     onClick={() => onOpenDemo(plan.name)}
                     className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
                       plan.popular
-                        ? 'bg-[#064E3B] text-white hover:bg-[#043E2F] shadow-md border border-[#064E3B]'
+                        ? 'bg-[#00D492] text-[#0B192C] hover:bg-[#00B87D] shadow-md border border-[#00D492]'
                         : 'border-2 border-[#0B192C]/20 bg-white text-[#0B192C] hover:bg-[#F4F4F0] hover:border-[#0B192C]/40'
                     }`}
                   >
@@ -186,7 +186,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                   <tr className="border-b-2 border-[#0B192C]/15 text-[#0B192C] bg-[#FAF9F5]">
                     <th className="py-4 px-5 font-bold text-sm w-1/3">ফিচার বিবরণী</th>
                     <th className="py-4 px-3 text-center font-bold">Nexus (৳১,৯৯০)</th>
-                    <th className="py-4 px-3 text-center font-bold bg-[#ECFDF5] text-[#064E3B] border-x border-[#064E3B]/20">Spark (৳৪,৯৯০)</th>
+                    <th className="py-4 px-3 text-center font-bold bg-[#E6FBF4] text-[#00875A] border-x border-[#00D492]/30">Spark (৳৪,৯৯০)</th>
                     <th className="py-4 px-3 text-center font-bold">Rise (৳১২,৫০০)</th>
                     <th className="py-4 px-3 text-center font-bold">Titan (কাস্টম)</th>
                   </tr>
@@ -203,7 +203,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                         <tr key={idx} className="hover:bg-[#FAF9F5]">
                           <td className="py-3 px-5 text-[#0B192C] font-semibold">{item.name}</td>
                           <td className="py-3 px-3 text-center">{renderCompCell(item.nexus)}</td>
-                          <td className="py-3 px-3 text-center bg-[#ECFDF5]/60 font-bold border-x border-[#064E3B]/20">{renderCompCell(item.spark)}</td>
+                          <td className="py-3 px-3 text-center bg-[#E6FBF4]/60 font-bold border-x border-[#00D492]/30">{renderCompCell(item.spark)}</td>
                           <td className="py-3 px-3 text-center">{renderCompCell(item.rise)}</td>
                           <td className="py-3 px-3 text-center">{renderCompCell(item.titan)}</td>
                         </tr>
@@ -219,7 +219,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
         {/* Frequently Asked Questions */}
         <div className="mt-20 pt-16 border-t border-[#0B192C]/10 max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <span className="inline-block rounded-full bg-[#ECFDF5] text-[#064E3B] px-3 py-1 text-xs font-bold uppercase tracking-wider mb-2">
+            <span className="inline-block rounded-full bg-[#E6FBF4] text-[#00875A] px-3 py-1 text-xs font-bold uppercase tracking-wider mb-2 border border-[#00D492]/30">
               সাধারণ জিজ্ঞাসা (FAQ)
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B192C]">
@@ -240,7 +240,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
                     className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-[#0B192C] hover:bg-[#FAF9F5] transition-colors text-sm"
                   >
                     <span>{faq.q}</span>
-                    {isOpen ? <ChevronUp className="h-5 w-5 text-[#064E3B] shrink-0" /> : <ChevronDown className="h-5 w-5 text-slate-400 shrink-0" />}
+                    {isOpen ? <ChevronUp className="h-5 w-5 text-[#00875A] shrink-0" /> : <ChevronDown className="h-5 w-5 text-slate-400 shrink-0" />}
                   </button>
                   {isOpen && (
                     <div className="px-5 pb-5 text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium border-t border-[#0B192C]/5 pt-3 bg-[#FAF9F5]/40">
@@ -259,7 +259,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo }) => {
 
 function renderCompCell(val: boolean | string) {
   if (val === true) {
-    return <Check className="h-4 w-4 text-[#064E3B] mx-auto stroke-[3]" />;
+    return <Check className="h-4 w-4 text-[#00875A] mx-auto stroke-[3]" />;
   }
   if (val === false) {
     return <span className="text-[#0B192C]/30 font-bold">—</span>;

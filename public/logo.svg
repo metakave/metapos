@@ -2,12 +2,12 @@
   <!-- Geometric Book & Register Mark -->
   <rect x="2" y="8" width="34" height="34" rx="9" fill="#0B192C" />
   <path d="M10 17C10 17 14 15.5 19 17.5C24 19.5 27 18.5 27 18.5V31C27 31 24 32 19 30C14 28 10 29 10 29V17Z" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="19" y1="17.5" x2="19" y2="30" stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+  <line x1="19" y1="17.5" x2="19" y2="30" stroke="#00D492" stroke-width="2" stroke-linecap="round" />
   <circle cx="28" cy="11" r="3.5" fill="#D97706" />
   
   <!-- Typography in Editorial Navy with Deep Emerald Accent -->
   <text x="46" y="31" font-family="'Noto Serif Bengali', 'Inter', -apple-system, serif" font-size="23" font-weight="700" letter-spacing="-0.03em" fill="#0B192C">
-    Meta<tspan font-weight="800" fill="#046A38">POS</tspan>
+    Meta<tspan font-weight="800" fill="#00D492">POS</tspan>
   </text>
   <circle cx="152" cy="27" r="3" fill="#831843" />
 </svg>

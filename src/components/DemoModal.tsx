@@ -227,13 +227,13 @@ export const DemoModal: React.FC<DemoModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4.5 border-b border-[#0B192C]/10 bg-[#0B192C] text-white">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-[#064E3B] text-white flex items-center justify-center shadow-inner">
-              <Zap className="h-5 w-5 text-amber-300" />
+            <div className="h-10 w-10 rounded-xl bg-[#00D492] text-[#0B192C] flex items-center justify-center shadow-inner">
+              <Zap className="h-5 w-5 text-[#0B192C]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-base font-extrabold text-white">MetaPOS ফ্রি ডেমো</h3>
-                <span className="rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 border border-emerald-400/30">
+                <span className="rounded-full bg-[#00D492]/20 text-[#00D492] text-[10px] font-extrabold px-2 py-0.5 border border-[#00D492]/30">
                   ৭ দিনের ফ্রি ট্রায়াল
                 </span>
               </div>
@@ -257,13 +257,13 @@ export const DemoModal: React.FC<DemoModalProps> = ({
               onClick={() => setActiveTab('instant')}
               className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
                 activeTab === 'instant'
-                  ? 'bg-white text-[#064E3B] shadow-xs border border-[#064E3B]/20'
+                  ? 'bg-white text-[#00875A] shadow-xs border border-[#00D492]/30'
                   : 'text-[#0B192C]/70 hover:text-[#0B192C] hover:bg-white/50'
               }`}
             >
-              <Zap className="h-3.5 w-3.5 text-amber-500" />
+              <Zap className="h-3.5 w-3.5 text-[#00D492]" />
               <span>তাত্ক্ষণিক লাইভ ডেমো স্টোর</span>
-              <span className="text-[10px] bg-[#ECFDF5] text-[#064E3B] px-1.5 py-0.2 rounded font-black border border-[#064E3B]/20">
+              <span className="text-[10px] bg-[#E6FBF4] text-[#00875A] px-1.5 py-0.2 rounded font-black border border-[#00D492]/30">
                 স্বয়ংক্রিয়
               </span>
             </button>
@@ -285,12 +285,12 @@ export const DemoModal: React.FC<DemoModalProps> = ({
         {/* Tab 1: Instant Store Creation Success */}
         {createdStore ? (
           <div className="p-7 space-y-5 text-center">
-            <div className="mx-auto h-16 w-16 rounded-2xl bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center shadow-lg shadow-[#064E3B]/10 border border-[#064E3B]/20 animate-bounce">
-              <CheckCircle className="h-9 w-9" />
+            <div className="mx-auto h-16 w-16 rounded-2xl bg-[#E6FBF4] text-[#00875A] flex items-center justify-center shadow-lg shadow-[#00D492]/10 border border-[#00D492]/30 animate-bounce">
+              <CheckCircle className="h-9 w-9 text-[#00875A]" />
             </div>
 
             <div>
-              <span className="inline-block rounded-full bg-[#ECFDF5] text-[#064E3B] text-[11px] font-black px-3 py-1 border border-[#064E3B]/20 mb-2">
+              <span className="inline-block rounded-full bg-[#E6FBF4] text-[#00875A] text-[11px] font-black px-3 py-1 border border-[#00D492]/30 mb-2">
                 🎉 স্টোর প্রস্তুত ও সক্রিয়
               </span>
               <h4 className="text-xl sm:text-2xl font-extrabold text-[#0B192C]">
@@ -298,26 +298,26 @@ export const DemoModal: React.FC<DemoModalProps> = ({
               </h4>
               <p className="mt-1 text-xs text-[#0B192C]/75 max-w-md mx-auto">
                 আপনার ক্লাউড পিওএস ও বুকস্টোর ইনস্ট্যান্স সম্পূর্ণ প্রস্তুত। লগইন ক্রেডেনশিয়াল আপনার ইমেইল{' '}
-                <strong className="text-[#064E3B] font-bold">{createdStore.ownerLogin}</strong> এ পাঠিয়ে দেওয়া হয়েছে।
+                <strong className="text-[#00875A] font-bold">{createdStore.ownerLogin}</strong> এ পাঠিয়ে দেওয়া হয়েছে।
               </p>
             </div>
 
             {/* Direct Open Store CTA */}
-            <div className="p-4 bg-gradient-to-br from-[#064E3B] to-[#043E2F] rounded-2xl text-white shadow-lg shadow-[#064E3B]/20 text-left">
+            <div className="p-4 bg-gradient-to-br from-[#0B192C] to-[#070F1A] border-2 border-[#00D492] rounded-2xl text-white shadow-lg text-left">
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-200 flex items-center gap-1.5">
-                  <Globe className="h-3.5 w-3.5 text-emerald-300" /> আপনার ডেমো স্টোর URL
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#00D492] flex items-center gap-1.5">
+                  <Globe className="h-3.5 w-3.5 text-[#00D492]" /> আপনার ডেমো স্টোর URL
                 </span>
-                <span className="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded text-white">লাইভ পিওএস</span>
+                <span className="text-[10px] font-extrabold bg-[#00D492] text-[#0B192C] px-2 py-0.5 rounded">লাইভ পিওএস</span>
               </div>
-              <div className="flex items-center justify-between bg-black/20 rounded-xl p-2.5 font-mono text-xs text-white gap-2">
-                <span className="truncate font-bold">{createdStore.url}</span>
+              <div className="flex items-center justify-between bg-black/40 rounded-xl p-2.5 font-mono text-xs text-white gap-2 border border-white/10">
+                <span className="truncate font-bold text-[#00D492]">{createdStore.url}</span>
                 <button
                   type="button"
                   onClick={() => copyToClipboard(createdStore.url, 'url')}
                   className="px-2 py-1 bg-white/15 hover:bg-white/25 rounded text-[11px] font-sans font-bold flex items-center gap-1 shrink-0"
                 >
-                  {copiedField === 'url' ? <Check className="h-3 w-3 text-emerald-300" /> : <Copy className="h-3 w-3" />}
+                  {copiedField === 'url' ? <Check className="h-3 w-3 text-[#00D492]" /> : <Copy className="h-3 w-3" />}
                   {copiedField === 'url' ? 'কপি হয়েছে' : 'কপি'}
                 </button>
               </div>
@@ -326,7 +326,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({
                 href={createdStore.url}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3.5 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-[#0B192C] font-extrabold text-xs py-3 shadow-md transition-all active:scale-95"
+                className="mt-3.5 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#00D492] hover:bg-[#00B87D] text-[#0B192C] font-extrabold text-xs py-3 shadow-md transition-all active:scale-95"
               >
                 <span>স্টোরে প্রবেশ করে কাউন্টার চালু করুন</span>
                 <ExternalLink className="h-4 w-4" />
@@ -334,9 +334,9 @@ export const DemoModal: React.FC<DemoModalProps> = ({
             </div>
 
             {/* Credentials Card */}
-            <div className="rounded-2xl border-2 border-dashed border-[#064E3B]/30 bg-[#FAF9F5] p-4 text-left space-y-2.5">
+            <div className="rounded-2xl border-2 border-dashed border-[#00D492]/40 bg-[#FAF9F5] p-4 text-left space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-black text-[#064E3B] uppercase tracking-wider">
+                <span className="text-[11px] font-black text-[#00875A] uppercase tracking-wider">
                   🔑 লগইন ক্রেডেনশিয়াল
                 </span>
                 <span className="text-[10px] text-[#0B192C]/60 font-semibold">নিরাপদে সংরক্ষণ করুন</span>
@@ -352,7 +352,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({
                     className="p-1 hover:bg-slate-100 rounded text-slate-500"
                     title="কপি করুন"
                   >
-                    {copiedField === 'email' ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3" />}
+                    {copiedField === 'email' ? <Check className="h-3 w-3 text-[#00875A]" /> : <Copy className="h-3 w-3" />}
                   </button>
                 </div>
               </div>
@@ -360,14 +360,14 @@ export const DemoModal: React.FC<DemoModalProps> = ({
               <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-[#0B192C]/10 text-xs">
                 <span className="text-[#0B192C]/60 font-semibold">পাসওয়ার্ড:</span>
                 <div className="flex items-center gap-2">
-                  <span className="font-extrabold text-[#064E3B] font-mono tracking-wider">{createdStore.ownerPassword}</span>
+                  <span className="font-extrabold text-[#00875A] font-mono tracking-wider">{createdStore.ownerPassword}</span>
                   <button
                     type="button"
                     onClick={() => copyToClipboard(createdStore.ownerPassword, 'pass')}
                     className="p-1 hover:bg-slate-100 rounded text-slate-500"
                     title="কপি করুন"
                   >
-                    {copiedField === 'pass' ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3" />}
+                    {copiedField === 'pass' ? <Check className="h-3 w-3 text-[#00875A]" /> : <Copy className="h-3 w-3" />}
                   </button>
                 </div>
               </div>

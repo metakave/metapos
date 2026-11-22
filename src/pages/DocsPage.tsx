@@ -28,7 +28,7 @@ const NAV: { id: SectionId; label: string; icon: React.ComponentType<{ className
 const Section: React.FC<{ n: string; title: string; intro: string; children: React.ReactNode }> = ({ n, title, intro, children }) => (
   <div className="space-y-5">
     <div className="border-b border-[#0B192C]/10 pb-4">
-      <span className="text-xs font-bold text-[#064E3B] uppercase">অধ্যায় {n}</span>
+      <span className="text-xs font-bold text-[#00875A] uppercase">অধ্যায় {n}</span>
       <h2 className="text-2xl font-bold text-[#0B192C] mt-1">{title}</h2>
     </div>
     <p className="text-xs sm:text-sm text-[#0B192C]/80 leading-relaxed font-medium">{intro}</p>
@@ -72,8 +72,8 @@ export const DocsPage: React.FC = () => {
     <div className="pt-28 pb-24 bg-[#FBFBFA]">
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
         <div className="max-w-3xl mb-10">
-          <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#064E3B]/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#064E3B] mb-3">
-            ব্যবহার নির্দেশিকা (User Documentation)
+          <span className="inline-block rounded-full bg-[#E6FBF4] border border-[#00D492]/40 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#00875A] mb-3">
+            ব্যবহার নির্দেশিকা
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#0B192C]">MetaPOS ব্যবহার নির্দেশিকা</h1>
           <p className="mt-2 text-sm sm:text-base text-[#0B192C]/80 font-medium">
@@ -93,14 +93,14 @@ export const DocsPage: React.FC = () => {
                   onClick={() => setActive(item.id)}
                   aria-current={isSelected ? 'page' : undefined}
                   className={`w-full flex items-center justify-between p-3 rounded-xl text-xs font-bold transition-all text-left ${
-                    isSelected ? 'bg-[#064E3B] text-white shadow-xs' : 'text-[#0B192C] hover:bg-[#FAF9F5]'
+                    isSelected ? 'bg-[#00D492] text-[#0B192C] shadow-xs' : 'text-[#0B192C] hover:bg-[#FAF9F5]'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Icon className={`h-4 w-4 ${isSelected ? 'text-amber-300' : 'text-[#064E3B]'}`} />
+                    <Icon className={`h-4 w-4 ${isSelected ? 'text-[#0B192C]' : 'text-[#00875A]'}`} />
                     <span>{item.label}</span>
                   </div>
-                  <ChevronRight className={`h-3.5 w-3.5 ${isSelected ? 'text-white' : 'text-slate-300'}`} />
+                  <ChevronRight className={`h-3.5 w-3.5 ${isSelected ? 'text-[#0B192C]' : 'text-slate-300'}`} />
                 </button>
               );
             })}
@@ -111,7 +111,7 @@ export const DocsPage: React.FC = () => {
                 href="https://wa.me"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-bold text-[#064E3B] hover:underline"
+                className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-bold text-[#00875A] hover:underline"
               >
                 <span>হোয়াটসঅ্যাপে টেকনিক্যাল সাপোর্ট নিন</span>
                 <ExternalLink className="h-3 w-3" />

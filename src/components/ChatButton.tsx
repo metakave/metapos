@@ -136,20 +136,20 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ onOpenDemo }) => {
 
   return (
     <>
-      {/* Floating Action Button: Deep Emerald with Warm Amber Ping */}
+      {/* Floating Action Button: Brand Mint Green (#00D492) with Dark Navy text */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-label="বাংলা সহায়তা ও চ্যাট"
-        className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#064E3B] text-white shadow-xl shadow-[#064E3B]/30 transition-all hover:scale-105 hover:bg-[#043E2F] active:scale-95 border-2 border-white/20"
+        className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#00D492] text-[#0B192C] shadow-xl shadow-[#00D492]/30 transition-all hover:scale-105 hover:bg-[#00B87D] active:scale-95 border-2 border-white/40"
       >
         {isOpen ? (
           <X className="h-6 w-6" />
         ) : (
           <div className="relative">
-            <MessageCircle className="h-6 w-6" />
+            <MessageCircle className="h-6 w-6 stroke-[2.5]" />
             <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F59E0B] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#D97706]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0B192C] opacity-40"></span>
+              <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#0B192C]"></span>
             </span>
           </div>
         )}
@@ -161,13 +161,13 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ onOpenDemo }) => {
           {/* Header in Editorial Navy */}
           <div className="flex items-center justify-between bg-[#0B192C] px-4 py-3.5 text-white">
             <div className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-lg bg-[#064E3B] flex items-center justify-center">
-                <BookOpen className="h-4 w-4 text-emerald-300" />
+              <div className="h-8 w-8 rounded-lg bg-[#00D492] flex items-center justify-center text-[#0B192C]">
+                <BookOpen className="h-4 w-4 text-[#0B192C]" />
               </div>
               <div>
                 <h4 className="text-xs font-bold text-white">MetaPOS প্রকাশনা হেল্পডেস্ক</h4>
-                <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                <div className="flex items-center gap-1.5 text-[10px] text-[#00D492] font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#00D492] animate-pulse" />
                   <span>সরাসরি অনলাইন • বাংলা সাপোর্ট টিম</span>
                 </div>
               </div>
@@ -190,12 +190,12 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ onOpenDemo }) => {
                 <div
                   className={`rounded-2xl p-3 max-w-[85%] leading-relaxed ${
                     m.sender === 'user'
-                      ? 'bg-[#064E3B] text-white rounded-br-xs font-medium'
+                      ? 'bg-[#00D492] text-[#0B192C] rounded-br-xs font-semibold shadow-xs'
                       : 'bg-white border border-[#0B192C]/10 text-[#0B192C] shadow-2xs rounded-bl-xs font-medium'
                   }`}
                 >
                   {m.sender === 'admin' && (
-                    <span className="block text-[10px] font-bold text-[#064E3B] mb-1">MetaPOS সাপোর্ট টিম</span>
+                    <span className="block text-[10px] font-bold text-[#00875A] mb-1">MetaPOS সাপোর্ট টিম</span>
                   )}
                   <p className="whitespace-pre-wrap">{m.text}</p>
                   {m.hasCta && (
@@ -204,9 +204,9 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ onOpenDemo }) => {
                         setIsOpen(false);
                         onOpenDemo();
                       }}
-                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg bg-[#064E3B] px-3.5 py-1.5 text-[11px] font-bold text-white hover:bg-[#043E2F]"
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg bg-[#00D492] px-3.5 py-1.5 text-[11px] font-bold text-[#0B192C] hover:bg-[#00B87D] shadow-xs"
                     >
-                      <Sparkles className="h-3 w-3 text-amber-300" />
+                      <Sparkles className="h-3 w-3 text-[#0B192C]" />
                       <span>ফ্রি ডেমো বুক করুন</span>
                     </button>
                   )}
@@ -230,15 +230,15 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ onOpenDemo }) => {
               value={inputText}
               maxLength={1000}
               onChange={(e) => setInputText(e.target.value)}
-              className="flex-1 rounded-xl border border-[#0B192C]/20 py-2 px-3 text-xs focus:border-[#064E3B] focus:outline-none"
+              className="flex-1 rounded-xl border border-[#0B192C]/20 py-2 px-3 text-xs focus:border-[#00D492] focus:outline-none"
             />
             <button
               type="submit"
               disabled={sending}
               aria-label="পাঠান"
-              className="h-8 w-8 disabled:opacity-60 rounded-xl bg-[#064E3B] text-white flex items-center justify-center hover:bg-[#043E2F] transition-colors shrink-0"
+              className="h-8 w-8 disabled:opacity-60 rounded-xl bg-[#00D492] text-[#0B192C] flex items-center justify-center hover:bg-[#00B87D] transition-colors shrink-0 font-bold"
             >
-              <Send className="h-3.5 w-3.5 text-amber-300" />
+              <Send className="h-3.5 w-3.5 text-[#0B192C]" />
             </button>
           </form>
         </div>

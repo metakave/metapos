@@ -155,14 +155,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
         {/* Hero Header */}
         <div className="mx-auto max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#D97706]/40 bg-[#FFFBEB] px-4 py-1.5 text-xs font-semibold text-[#78350F] shadow-[0_2px_8px_rgba(180,83,9,0.08)] mb-6">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-[#064E3B] animate-pulse" />
+            <span className="flex h-2.5 w-2.5 rounded-full bg-[#00D492] animate-pulse" />
             <span className="text-[#831843] font-bold">Go beyond POS.</span>
             <span className="text-[#0B192C] font-semibold">বাংলাদেশের প্রকাশনা ও বই বিক্রির পূর্ণাঙ্গ ওএস</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#0B192C] leading-[1.14] sm:leading-[1.14]">
             Go beyond POS. <br />
-            <span className="font-serif italic font-normal text-[#064E3B]">
+            <span className="font-serif italic font-normal text-[#00875A]">
               আপনার সেলস সিস্টেমের
             </span>{' '}
             অপারেটিং সিস্টেম
@@ -170,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
 
           <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg lg:text-xl text-[#0B192C]/80 leading-relaxed font-normal">
             বাংলাদেশের প্রকাশনী ও বইয়ের শোরুমের জন্য বিশেষভাবে তৈরি —{' '}
-            <strong className="text-[#064E3B] font-bold">অমর একুশে বইমেলার নেটওয়ার্ক জ্যামেও সচল অফলাইন কাউন্টার</strong>,{' '}
+            <strong className="text-[#00875A] font-bold">অমর একুশে বইমেলার নেটওয়ার্ক জ্যামেও সচল অফলাইন কাউন্টার</strong>,{' '}
             <strong className="text-[#831843] font-bold">বিকাশ ও নগদ ইন্টিগ্রেশন</strong>, লাইভ স্টকে{' '}
             <strong className="text-[#0B192C] font-bold">লেখক রয়্যালটি ও ফর্মা কস্টিং</strong>, এবং বাংলা ক্যাটালগের স্মার্ট এআই।
           </p>
@@ -178,11 +178,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={onOpenDemo}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#064E3B] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[#064E3B]/25 transition-all hover:bg-[#043E2F] hover:shadow-xl active:scale-95 border border-[#064E3B] cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-[#00D492] px-8 py-3.5 text-base font-extrabold text-[#0B192C] shadow-lg shadow-[#00D492]/25 transition-all hover:bg-[#00B87D] hover:shadow-xl active:scale-95 border border-[#00D492] cursor-pointer"
             >
-              <Zap className="h-4 w-4 text-[#FDE68A]" />
+              <Zap className="h-4 w-4 text-[#0B192C]" />
               <span>ফ্রি ডেমো স্টোর তৈরি করুন (Instant Demo)</span>
-              <ArrowRight className="h-4 w-4 text-[#FDE68A]" />
+              <ArrowRight className="h-4 w-4 text-[#0B192C]" />
             </button>
             <a
               href="#pricing"
@@ -194,13 +194,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-[#0B192C]/80">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-[#064E3B]" /> ৭ দিনের ফ্রি ট্রায়াল (7 Days Free Trial)
+              <CheckCircle2 className="h-4 w-4 text-[#00875A]" /> ৭ দিনের ফ্রি ট্রায়াল (7 Days Free Trial)
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-[#064E3B]" /> ISBN-10 ও ISBN-13 বারকোড সাপোর্ট
+              <CheckCircle2 className="h-4 w-4 text-[#00875A]" /> ISBN-10 ও ISBN-13 বারকোড সাপোর্ট
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-[#064E3B]" /> সম্পূর্ণ বাংলা ইন্টারফেস
+              <CheckCircle2 className="h-4 w-4 text-[#00875A]" /> সম্পূর্ণ বাংলা ইন্টারফেস
             </span>
           </div>
         </div>
@@ -209,7 +209,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
         <div className="mt-14 sm:mt-18 rounded-2xl border-2 border-[#0B192C]/15 bg-white shadow-[0_20px_60px_-15px_rgba(11,25,44,0.12)] overflow-hidden">
           <div className="flex flex-wrap items-center justify-between border-b border-[#0B192C]/10 bg-[#0B192C] px-4 sm:px-6 py-3 gap-3 text-white">
             <div className="flex items-center gap-2">
-              <div className="h-7 w-7 rounded-lg bg-[#064E3B] text-white flex items-center justify-center font-bold text-xs shadow-xs">MP</div>
+              <div className="h-7 w-7 rounded-lg bg-[#00D492] text-[#0B192C] flex items-center justify-center font-extrabold text-xs shadow-xs">MP</div>
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-white tracking-wide">বই ঘর - কাউন্টার ১ • বইমেলা মোড</span>
                 <span className="text-[10px] text-slate-300 font-medium -mt-0.5">ক্যাশিয়ার: তানভীর আহমেদ</span>
@@ -224,7 +224,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
                   aria-selected={activeTab === t.id}
                   onClick={() => setActiveTab(t.id)}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all ${
-                    activeTab === t.id ? 'bg-[#064E3B] text-white font-bold shadow-xs' : 'hover:text-white'
+                    activeTab === t.id ? 'bg-[#00D492] text-[#0B192C] font-extrabold shadow-xs' : 'hover:text-white'
                   }`}
                 >
                   <t.icon className="h-3.5 w-3.5 text-emerald-300" />
@@ -233,8 +233,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
               ))}
             </div>
 
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border bg-[#ECFDF5] text-[#064E3B] border-[#10B981]">
-              <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border bg-[#E6FBF4] text-[#00875A] border-[#00D492]">
+              <span className="h-2 w-2 rounded-full bg-[#00D492] animate-pulse" />
               সেশন খোলা
             </span>
           </div>
@@ -438,13 +438,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
                   <div className="pt-2">
                     <button
                       onClick={onOpenDemo}
-                      className="w-full flex items-center justify-between rounded-xl bg-[#064E3B] px-4 py-3 text-xs font-bold text-white shadow-md shadow-[#064E3B]/20 hover:bg-[#043E2F] transition-all border border-[#064E3B]"
+                      className="w-full flex items-center justify-between rounded-xl bg-[#00D492] px-4 py-3 text-xs font-extrabold text-[#0B192C] shadow-md shadow-[#00D492]/20 hover:bg-[#00B87D] transition-all border border-[#00D492] cursor-pointer"
                     >
                       <div className="flex items-center gap-2">
-                        <Banknote className="h-4 w-4 text-emerald-300" />
+                        <Banknote className="h-4 w-4 text-[#0B192C]" />
                         <span>পেমেন্ট (ক্যাশ / কার্ড) ও রিসিট</span>
                       </div>
-                      <span className="text-sm font-black bg-white/20 px-2.5 py-0.5 rounded">{taka(payable)} →</span>
+                      <span className="text-sm font-black bg-black/10 px-2.5 py-0.5 rounded">{taka(payable)} →</span>
                     </button>
                   </div>
                 </div>

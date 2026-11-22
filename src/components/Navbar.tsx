@@ -73,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
             onClick={onOpenSignIn}
             className="text-[14px] font-bold text-[#0B192C] hover:text-[#00875A] px-3 py-2 transition-colors cursor-pointer"
           >
-            লগইন (Sign In)
+            লগইন
           </button>
           <button
             onClick={onOpenDemo}
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenSignIn }) => {
                 }}
                 className="w-full text-center py-2.5 text-sm font-bold text-[#0B192C] rounded-lg border border-slate-300"
               >
-                লগইন (Sign In)
+                লগইন
               </button>
               <button
                 onClick={() => {
